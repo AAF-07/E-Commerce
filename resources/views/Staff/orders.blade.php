@@ -1,8 +1,4 @@
-<h1>Home</h1>
-<form method="POST" action="{{ url('/staff/logout') }}">
-    @csrf
-    <button type="submit">Logout</button>
-</form>
+<h1>Orders</h1>
 
 <nav>
     <ul></ul>

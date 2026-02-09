@@ -23,4 +23,13 @@ class AuthStaff extends Controller
             'username' => 'Username atau password salah.',
         ]);
     }
+
+    public function logout(Request $request)
+    {
+        auth()->guard('staff')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/staff');
+    }
 }
