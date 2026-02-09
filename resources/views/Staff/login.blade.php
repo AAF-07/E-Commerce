@@ -1,10 +1,11 @@
 <h1>BookShelf</h1>
 
-<div class="">
-    <form action="login">
+<div class="text-xs text-gray-500">
+     Sign in
+    <form action="{{ url('/staff') }}" method="POST">
         @csrf
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
         <br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>

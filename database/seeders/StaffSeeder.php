@@ -2,27 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\Staff;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class DatabaseSeeder extends Seeder
+class StaffSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         Staff::create([
             'username' => 'staff1',
             'password' => bcrypt('password123'),
