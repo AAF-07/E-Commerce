@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    //handle tambah produk
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -30,18 +31,21 @@ class ProductController extends Controller
         return redirect()->route('staff.products.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
+    //handle view all products
     public function index()
     {
         $products = Produk::all();
         return view('Staff.products', compact('products'));
     }
 
+    //handle edit product ambil per id
     public function edit($id)
     {
         $product = Produk::findOrFail($id);
         return view('Staff.Product.edit', compact('product'));
     }
 
+    //handle update product
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([

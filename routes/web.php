@@ -23,6 +23,8 @@ route::get('/staff/orders', function () {
     return view('Staff.orders');
 });
 
+route::get('/staff/products', [ProductController::class, 'index'])->name('staff.products.index');
+
 //tambah produk routes
 route::post('/staff/products/add', [ProductController::class, 'store'])->name('staff.products.store');
 route::get('/staff/products/add', function () {
@@ -33,4 +35,3 @@ route::get('/staff/products/add', function () {
 route::get('/staff/products/edit/{id}', [ProductController::class, 'edit'])->name('staff.products.edit');
 route::put('/staff/products/edit/{id}', [ProductController::class, 'update'])->name('staff.products.update');
 
-route::get('/staff/products', [ProductController::class, 'index'])->name('staff.products.index');

@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 
 class AuthStaff extends Controller
 {
+    // Show the staff login form
     public function showLoginForm()
     {
         return view('Staff.login');
     }
 
+    // Handle staff login
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
@@ -24,6 +26,7 @@ class AuthStaff extends Controller
         ]);
     }
 
+    // Handle staff logout
     public function logout(Request $request)
     {
         auth()->guard('staff')->logout();
