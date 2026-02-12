@@ -3,18 +3,17 @@
 
         {{-- Left: Logo --}}
         <div class="flex items-center gap-2">
-            <img src="{{ asset('storage/logo.png') }}" alt="Logo" class="h-10">
-            {{-- kalau mau teks saja --}}
-            {{-- <span class="text-2xl font-bold text-teal-600">ES</span> --}}
+            <img src="{{ asset('storage/The Platypus.png') }}" alt="Logo" class="h-10">
         </div>
 
         {{-- Middle: Search --}}
-        <div class="flex-1 mx-10">
-            <div class="relative">
+        <div class="flex justify-center  mx-10 ">
+            <div class="relative sticky top-0">
+
                 <input
                     type="text"
                     placeholder="Search"
-                    class="w-full bg-gray-200 rounded-full px-10 py-2 focus:outline-none"
+                    class="w-180 bg-gray-200 rounded-full px-10 py-2 focus:outline-none "
                 >
                 <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500"
                      fill="none" stroke="currentColor" stroke-width="2"
@@ -42,16 +41,5 @@
 
     </div>
 </header>
-            <nav class="flex gap-6 font-semibold items-center justify-center py-4">
-                <a href="/staff/dashboard"
-                   class="border-b-2 border-teal-500 pb-1">
-                    Home
-                </a>
-                <a href="/staff/products" class="hover:text-teal-500">
-                    Product
-                </a>
-                <a href="/staff/orders" class="hover:text-teal-500">
-                    Orders
-                </a>
-            </nav>
+
 

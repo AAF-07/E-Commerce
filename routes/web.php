@@ -35,3 +35,4 @@ route::get('/staff/products/add', function () {
 route::get('/staff/products/edit/{id}', [ProductController::class, 'edit'])->name('staff.products.edit');
 route::put('/staff/products/edit/{id}', [ProductController::class, 'update'])->name('staff.products.update');
 
+route::delete('/staff/products/delete/{id}', [ProductController::class, 'destroy'])->name('staff.products.destroy');

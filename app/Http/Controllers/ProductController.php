@@ -69,4 +69,12 @@ class ProductController extends Controller
 
         return redirect()->route('staff.products.index')->with('success', 'Produk berhasil diperbarui.');
     }
+
+    public function destroy($id)
+    {
+        $product = Produk::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('staff.products.index')->with('success', 'Produk berhasil dihapus.');
+    }
 }
