@@ -36,3 +36,7 @@ route::get('/staff/products/edit/{id}', [ProductController::class, 'edit'])->nam
 route::put('/staff/products/edit/{id}', [ProductController::class, 'update'])->name('staff.products.update');
 
 route::delete('/staff/products/delete/{id}', [ProductController::class, 'destroy'])->name('staff.products.destroy');
+
+route::get('/admin/dashboard', function () {
+    return view('Admin.dashboard');
+})->name('admin.dashboard');

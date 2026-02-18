@@ -15,10 +15,14 @@ class AuthStaff extends Controller
     // Handle staff login
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('username', 'password', 'role');
 
         if (auth()->guard('staff')->attempt($credentials)) {
-            return redirect()->intended('/staff/dashboard');
+            if (auth()->guard('staff')->user()->role === 'admin') {
+                return redirect()->intended('/admin/dashboard');
+            }else if (auth()->guard('staff')->user()->role === 'staff') {
+                return redirect()->intended('/staff/dashboard');
+            }
         }
 
         return back()->withErrors([

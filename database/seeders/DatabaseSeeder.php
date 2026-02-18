@@ -26,6 +26,12 @@ class DatabaseSeeder extends Seeder
         Staff::create([
             'username' => 'staff1',
             'password' => bcrypt('password123'),
+            'role' => 'staff',
+        ]);
+        Staff::create([
+            'username' => 'admin1',
+            'password' => bcrypt('adminpassword'),
+            'role' => 'admin',
         ]);
     }
 }

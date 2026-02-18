@@ -11,7 +11,7 @@ class Staff extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $table = 'akun_staff';
-    protected $fillable = ['username', 'password'];
+    protected $fillable = ['username', 'password', 'role'];
 
     /**
      * The attributes that should be hidden for serialization.
