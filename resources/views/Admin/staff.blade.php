@@ -1,16 +1,16 @@
 @include('Layout.layout')
 <nav class="flex gap-6 font-semibold items-center justify-center py-4">
-    <a href="/staff/dashboard"
+    <a href="/admin/dashboard"
        class="hover:text-teal-500">
         Home
     </a>
-    <a href="/staff/products" class="hover:text-teal-500">
+    <a href="/admin/report" class="hover:text-teal-500">
         Report
     </a>
-    <a href="/staff/orders" class="border-b-2 border-teal-500 pb-1">
+    <a href="/admin/staff" class="border-b-2 border-teal-500 pb-1">
         Staff
     </a>
-    <a href="/staff/orders" class="hover:text-teal-500">
+    <a href="/admin/backup" class="hover:text-teal-500">
         Back Up
     </a>
 </nav>

@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthStaff;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +38,25 @@ route::put('/staff/products/edit/{id}', [ProductController::class, 'update'])->n
 
 route::delete('/staff/products/delete/{id}', [ProductController::class, 'destroy'])->name('staff.products.destroy');
 
+//Admin routes
 route::get('/admin/dashboard', function () {
     return view('Admin.dashboard');
 })->name('admin.dashboard');
+
+route::get('/admin/staff', function () {
+    return view('Admin.staff');
+})->name('admin.staff');
+
+route::get('/admin/report', function () {
+    return view('Admin.report');
+})->name('admin.report');
+
+route::get('/admin/backup', function () {
+    return view('Admin.backup');
+})->name('admin.backup');
+
+route::get('/admin/report/user', ReportController::class . '@userReport')->name('admin.report.user');
+
+route::get('/admin/report/earning', ReportController::class . '@earningReport')->name('admin.report.earning');
+
+route::get('/admin/report/order', ReportController::class . '@orderReport')->name('admin.report.order');
