@@ -29,14 +29,30 @@
 
 
             {{-- Profile icon --}}
-            <div class="w-9 h-9 rounded-full border flex items-center justify-center">
-                <svg class="w-6 h-6"
-                     fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-            </div>
+            <div class="relative">
+    <!-- Icon Profile -->
+    <button onclick="toggleDropdown()" class="focus:outline-none">
+        <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5.121 17.804A4 4 0 0112 15a4 4 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+    </button>
+
+    <!-- Dropdown -->
+    <div id="profileDropdown"
+         class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border z-50">
+
+
+
+        <form action="{{ route('staff.logout') }}" method="POST">
+            @csrf
+            <button type="submit"
+                    class="w-full text-left px-4 py-2 hover:bg-red-100 text-red-500">
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
         </div>
 
     </div>

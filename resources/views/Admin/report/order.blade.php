@@ -98,9 +98,9 @@
         </div>
 
         <div class="text-right">
-            <span class="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold">
+            <a href="/admin/report/lapor" class="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold">
                 Dilaporkan
-            </span>
+            </a>
             <p class="mt-3 font-semibold">Oleh Abdul</p>
         </div>
 

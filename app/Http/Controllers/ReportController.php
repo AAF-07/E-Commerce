@@ -23,4 +23,10 @@ class ReportController extends Controller
         // Logika untuk mengambil data pesanan dan menampilkan laporan pesanan
         return view('Admin.report.order');
     }
+
+    public function lapor()
+    {
+        // Logika untuk mengambil data laporan dan menampilkan halaman laporan
+        return view('Admin.report.lapor');  
+    }
 }

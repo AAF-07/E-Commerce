@@ -7,6 +7,20 @@
     <title>E-commerce</title>
     @vite('resources/css/app.css')
 </head>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('profileDropdown');
+        dropdown.classList.toggle('hidden');
+    }
+
+    // klik luar nutup dropdown
+    window.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('profileDropdown');
+        if (!e.target.closest('.relative')) {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
 <body>
     @include('Layout.header')
 

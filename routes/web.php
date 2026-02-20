@@ -38,6 +38,8 @@ route::put('/staff/products/edit/{id}', [ProductController::class, 'update'])->n
 
 route::delete('/staff/products/delete/{id}', [ProductController::class, 'destroy'])->name('staff.products.destroy');
 
+route::get('/staff/logout', [AuthStaff::class, 'logout'])->name('staff.logout');
+
 //Admin routes
 route::get('/admin/dashboard', function () {
     return view('Admin.dashboard');
@@ -60,3 +62,5 @@ route::get('/admin/report/user', ReportController::class . '@userReport')->name(
 route::get('/admin/report/earning', ReportController::class . '@earningReport')->name('admin.report.earning');
 
 route::get('/admin/report/order', ReportController::class . '@orderReport')->name('admin.report.order');
+
+route::get('/admin/report/lapor', ReportController::class . '@lapor')->name('admin.report.lapor');
