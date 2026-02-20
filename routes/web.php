@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthStaff;
+use App\Http\Controllers\AuthUser;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('User.dashboard');
 });
 
 //Staff auth routes
@@ -64,3 +65,11 @@ route::get('/admin/report/earning', ReportController::class . '@earningReport')-
 route::get('/admin/report/order', ReportController::class . '@orderReport')->name('admin.report.order');
 
 route::get('/admin/report/lapor', ReportController::class . '@lapor')->name('admin.report.lapor');
+
+
+//user auth routes
+Route::get('/signup', [AuthUser::class, 'showsignupForm'])->name('user.signup');
+Route::post('/signup', [AuthUser::class, 'signup'])->name('user.signup.post');
+
+Route::get('/login', [AuthUser::class, 'showLoginForm'])->name('user.login');
+Route::post('/login', [AuthUser::class, 'login'])->name('user.login.post');
