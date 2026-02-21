@@ -16,39 +16,27 @@
 <div class="max-w-7xl mx-auto px-6 py-10">
 
     <!-- HERO SECTION -->
-    <div class="grid md:grid-cols-3 gap-6 mb-14">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
 
-        <!-- Hero Kiri -->
-        <div class="md:col-span-2 bg-teal-800 rounded-2xl p-10 text-white relative overflow-hidden">
-            <h1 class="text-4xl font-bold leading-snug">
-                Koleksi <br>
-                Buku Fiksi <br>
-                Terlengkap
-            </h1>
-
-            <div class="absolute right-6 bottom-6 flex gap-4">
-                <img src="{{ asset('images/poppy.jpg') }}" class="w-24 rounded shadow-lg">
-                <img src="{{ asset('images/demon.jpg') }}" class="w-24 rounded shadow-lg">
-                <img src="{{ asset('images/komi.jpg') }}" class="w-24 rounded shadow-lg">
-            </div>
-        </div>
-
-        <!-- Hero Kanan -->
-        <div class="flex flex-col gap-6">
-
-            <div class="bg-teal-700 text-white rounded-2xl p-6 flex justify-between items-center">
-                <h2 class="text-xl font-bold">Akan Datang</h2>
-                <img src="{{ asset('images/magic.jpg') }}" class="w-20 rounded">
-            </div>
-
-            <div class="bg-teal-500 text-white rounded-2xl p-6 flex justify-between items-center">
-                <h2 class="text-xl font-bold">Best Seller</h2>
-                <img src="{{ asset('images/bluelock.jpg') }}" class="w-20 rounded">
-            </div>
-
-        </div>
+    <!-- Main Hero (lebih besar) -->
+    <div class="md:col-span-2">
+        <img src="{{ asset('image/hero.png') }}"
+             alt="main-hero"
+             class="w-full h-full rounded-2xl shadow-lg">
     </div>
 
+    <!-- Side Hero -->
+    <div class="flex flex-col gap-6">
+        <img src="{{ asset('image/hero 1.png') }}"
+             alt="hero-1"
+             class="w-full h-full object-cover rounded-2xl shadow-md">
+
+        <img src="{{ asset('image/Hero2.png') }}"
+             alt="hero-2"
+             class="w-full h-full object-cover rounded-2xl shadow-md">
+    </div>
+
+</div>
 
     <!-- SECTION FUNCTION -->
     @php

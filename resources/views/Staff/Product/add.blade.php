@@ -26,7 +26,7 @@
                     </div>
 
                     <label class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-xl cursor-pointer transition">
-                        Ubah Foto
+                        Tambah Foto
                         <input type="file"
                                name="gambar_produk"
                                accept="image/*"

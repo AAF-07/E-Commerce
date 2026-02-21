@@ -9,10 +9,7 @@
 
     <!-- LEFT LOGO -->
     <div class="relative">
-        <div class="bg-teal-400 w-80 h-40 rounded-tr-3xl rounded-br-3xl shadow-lg"></div>
-        <h1 class="absolute top-8 left-6 text-6xl font-bold text-teal-800 drop-shadow-lg">
-            BookShelf
-        </h1>
+        <img src="{{ asset('storage/Logo-text.png') }}" alt="Logo" ></img>
     </div>
 
 
