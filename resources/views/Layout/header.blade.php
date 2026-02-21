@@ -3,7 +3,7 @@
 
         {{-- Left: Logo --}}
         <div class="flex items-center gap-2">
-            <img src="{{ asset('storage/The Platypus.png') }}" alt="Logo" class="h-10">
+            <img src="{{ asset('image/The Platypus.png') }}" alt="Logo" class="h-10">
         </div>
 
         {{-- Middle: Search --}}

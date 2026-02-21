@@ -51,14 +51,25 @@
                                required>
                     </div>
 
-                    {{-- Kategori --}}
                     <div>
                         <label class="block font-semibold mb-2">Kategori</label>
-                        <input type="text"
-                               name="kategori"
-                               class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300"
-                               value="{{ $product->kategori }}"
-                               required>
+
+                        <select name="categories[]"
+                                multiple
+                                class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300">
+
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}"
+                                    {{ $product->categories->contains($category->id) ? 'selected' : '' }}>
+                                    {{ $category->nama }}
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                        <p class="text-sm text-gray-500 mt-1">
+                            tekan CTRL (atau CMD di mac) untuk pilih lebih dari satu
+                        </p>
                     </div>
 
                     {{-- Harga --}}

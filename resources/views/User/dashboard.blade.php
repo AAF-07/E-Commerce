@@ -38,31 +38,20 @@
 
 </div>
 
-    <!-- SECTION FUNCTION -->
-    @php
-        $books = [
-            ['title' => 'Poppy War', 'price' => '160.000', 'image' => 'poppy.jpg'],
-            ['title' => 'Demon Slayer', 'price' => '38.000', 'image' => 'demon.jpg'],
-            ['title' => 'Komi Can’t Communicate', 'price' => '38.000', 'image' => 'komi.jpg'],
-            ['title' => 'Blue Lock', 'price' => '38.000', 'image' => 'bluelock.jpg'],
-            ['title' => 'The Magic Library', 'price' => '69.000', 'image' => 'magic.jpg'],
-        ];
-    @endphp
-
 
     <!-- BEST SELLER -->
     <h2 class="text-2xl font-bold mb-6">Best Seller</h2>
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
-        @foreach($books as $book)
+        @foreach($products as $product)
         <div class="group">
-            <img src="{{ asset('images/' . $book['image']) }}"
-                 class="rounded shadow-md group-hover:scale-105 transition duration-300">
+            <img src="{{ asset('storage/' . $product->gambar_produk) }}"
+                 class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
-                {{ $book['title'] }}
+                {{ $product->nama_produk }}
             </h3>
             <p class="text-gray-600">
-                Rp. {{ $book['price'] }}
+                Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
         </div>
         @endforeach
@@ -73,15 +62,15 @@
     <h2 class="text-2xl font-bold mb-6">New</h2>
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
-        @foreach($books as $book)
+        @foreach($latestproducts as $product)
         <div class="group">
-            <img src="{{ asset('images/' . $book['image']) }}"
-                 class="rounded shadow-md group-hover:scale-105 transition duration-300">
+            <img src="{{ asset('storage/' . $product->gambar_produk) }}"
+                 class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
-                {{ $book['title'] }}
+                {{ $product->nama_produk }}
             </h3>
             <p class="text-gray-600">
-                Rp. {{ $book['price'] }}
+                Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
         </div>
         @endforeach
@@ -92,15 +81,15 @@
     <h2 class="text-2xl font-bold mb-6">Komik</h2>
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
-        @foreach($books as $book)
+        @foreach($komikproducts as $product)
         <div class="group">
-            <img src="{{ asset('images/' . $book['image']) }}"
-                 class="rounded shadow-md group-hover:scale-105 transition duration-300">
+            <img src="{{ asset('storage/' . $product->gambar_produk) }}"
+                 class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
-                {{ $book['title'] }}
+                {{ $product->nama_produk }}
             </h3>
             <p class="text-gray-600">
-                Rp. {{ $book['price'] }}
+                Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
         </div>
         @endforeach
@@ -111,15 +100,15 @@
     <h2 class="text-2xl font-bold mb-6">Novel</h2>
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
-        @foreach($books as $book)
+        @foreach($novelproducts as $product)
         <div class="group">
-            <img src="{{ asset('images/' . $book['image']) }}"
-                 class="rounded shadow-md group-hover:scale-105 transition duration-300">
+            <img src="{{ asset('storage/' . $product->gambar_produk) }}"
+                 class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
-                {{ $book['title'] }}
+                {{ $product->nama_produk }}
             </h3>
             <p class="text-gray-600">
-                Rp. {{ $book['price'] }}
+                Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
         </div>
         @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
@@ -10,9 +11,12 @@ class Produk extends Model
     protected $fillable = [
         'nama_produk',
         'gambar_produk',
-        'kategori',
         'deskripsi',
         'harga',
         'stok',
     ];
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_produk', 'produk_id', 'category_id');
+    }
 }

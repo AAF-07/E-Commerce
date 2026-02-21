@@ -6,9 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('User.dashboard');
-});
+Route::get('/', ProductController::class . '@show')->name('home');
 
 //Staff auth routes
 Route::get('/staff', [AuthStaff::class, 'showLoginForm'])->name('staff.login');
@@ -29,9 +27,7 @@ route::get('/staff/products', [ProductController::class, 'index'])->name('staff.
 
 //tambah produk routes
 route::post('/staff/products/add', [ProductController::class, 'store'])->name('staff.products.store');
-route::get('/staff/products/add', function () {
-    return view('Staff.Product.add');
-})->name('staff.products.add');
+route::get('/staff/products/add', [ProductController::class, 'create'])->name('staff.products.create');
 
 //edit produk routes
 route::get('/staff/products/edit/{id}', [ProductController::class, 'edit'])->name('staff.products.edit');
