@@ -2,53 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthUser extends Controller
 {
-    public function showsignupForm()
+    public function showSignupForm()
     {
         return view('User.signup');
     }
 
     public function signup(Request $request)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:akun_user',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'no_hp' => 'required|string|max:13',
+            'no_hp' => 'nullable|string|max:14',
+            'alamat' => 'nullable|string|max:255',
         ]);
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        $validated['password'] = Hash::make($validated['password']);
 
-        \DB::table('akun_user')->insert($validatedData);
+        $user = User::create($validated);
 
-        return redirect('/')->with('success', 'Akun berhasil dibuat. Silakan login.');
+        auth()->guard('user')->login($user);
+
+        return redirect('/')->with('success', 'Signup berhasil!');
     }
 
-   // Show the staff login form
     public function showLoginForm()
     {
         return view('User.login');
     }
 
-    // Handle staff login
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('email', 'password');
 
         if (auth()->guard('user')->attempt($credentials)) {
             return redirect()->intended('/');
-        };
+        }
 
         return back()->withErrors([
-            'username' => 'Username atau password salah.',
+            'email' => 'Email atau password salah.',
         ]);
     }
 
-
-    // Handle staff logout
     public function logout(Request $request)
     {
         auth()->guard('user')->logout();
@@ -58,4 +59,3 @@ class AuthUser extends Controller
         return redirect('/');
     }
 }
-

@@ -1,10 +1,11 @@
-<header class="bg-white shadow-sm">
+
+ <header class="bg-[#FAF5F5] shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-        <!-- LEFT: Logo -->
+        <!-- LEFT -->
         <div class="flex items-center gap-4">
-            <a href="/" class="text-3xl font-bold text-teal-700">
-               BS
+            <a href="/" class="w-10">
+                <img src="{{ asset('image/Logo.png') }}" alt="logo">
             </a>
 
             <!-- Dropdown kecil -->
@@ -17,7 +18,6 @@
             </div>
         </div>
 
-        <!-- CENTER: Search -->
         <div class="flex-1 mx-10">
             <div class="relative">
                 <input type="text"
@@ -26,21 +26,33 @@
             </div>
         </div>
 
-        <!-- RIGHT: Auth Buttons -->
+        <!-- RIGHT -->
         <div class="flex items-center gap-4">
-            <a href="/login"
-               class="border border-gray-400 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
-                Masuk
-            </a>
 
-            <a href="/signup"
-               class="bg-teal-700 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition">
-                Daftar
-            </a>
+            @guest('user')
+                <a href="/login" class="border px-4 py-2 rounded-lg">
+                    Masuk
+                </a>
+
+                <a href="/signup" class="bg-teal-700 text-white px-4 py-2 rounded-lg">
+                    Daftar
+                </a>
+            @endguest
+
+            @auth('user')
+                <span class="font-semibold">
+                    {{ auth('user')->user()->name }}
+                </span>
+
+                <form action="{{ route('user.logout') }}" method="POST">
+                    @csrf
+                    <button class="border px-4 py-2 rounded-lg">
+                        Logout
+                    </button>
+                </form>
+            @endauth
+
         </div>
 
     </div>
-
-    <!-- MENU -->
-
 </header>
