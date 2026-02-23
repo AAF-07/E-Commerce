@@ -38,9 +38,7 @@ Route::get('/admin/dashboard', function () {
 Route::get('/admin/staff', [AuthStaff::class, 'showstaff'])->name('admin.staff');
 Route::post('/admin/staff', [AuthStaff::class, 'create'])->name('admin.staff.create');
 
-Route::get('/admin/report', function () {
-    return view('Admin.report');
-})->name('admin.report');
+Route::get('/admin/report', [ReportController::class, 'report'])->name('admin.report');
 
 Route::get('/admin/backup', function () {
     return view('Admin.backup');

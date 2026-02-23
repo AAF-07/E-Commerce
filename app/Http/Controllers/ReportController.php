@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -29,5 +30,11 @@ class ReportController extends Controller
     {
         // Logika untuk mengambil data laporan dan menampilkan halaman laporan
         return view('Admin.report.lapor');
+    }
+
+    public function report(){
+        $users = User::count();
+        $staffs = Staff::where('role', 'staff')->count();
+        return view('Admin.report', compact('users', 'staffs'));
     }
 }
