@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
     public function userReport()
     {
-        // Logika untuk mengambil data pengguna dan menampilkan laporan pengguna
-        return view('Admin.report.user');
+        $user = User::all();
+        return view('Admin.report.user', compact('user'));
     }
 
     public function earningReport()
@@ -27,6 +28,6 @@ class ReportController extends Controller
     public function lapor()
     {
         // Logika untuk mengambil data laporan dan menampilkan halaman laporan
-        return view('Admin.report.lapor');  
+        return view('Admin.report.lapor');
     }
 }

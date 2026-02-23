@@ -1,17 +1,7 @@
 @extends('User.Layout.layout')
 
 @section('content')
-    <nav class="flex gap-6 font-semibold items-center justify-center py-4">
-        <div class="max-w-7xl mx-auto px-6 py-3 flex gap-10 font-semibold">
-            <a href="/" class="hover:text-teal-600 border-b-2 border-teal-600 pb-1">
-                Home
-            </a>
 
-            <a href="/product" class="hover:text-teal-600">
-                Product
-            </a>
-        </div>
-    </nav>
 
 <div class="max-w-7xl mx-auto px-6 py-10">
 

@@ -31,11 +31,11 @@
             <div>Aksi</div>
         </div>
 
-        @for($i = 1; $i <= 16; $i++)
+        @foreach($user as $i => $u)
         <div class="grid grid-cols-5 px-6 py-4 items-center border-b">
-            <div>{{ $i }}</div>
-            <div>{{ $i % 2 == 0 ? 'Pramodya Anantatoer' : 'Abdul Aziz Firmansyah' }}</div>
-            <div>{{ $i % 2 == 0 ? 'anjaypenulis@gmail.com' : 'abdul98@gmail.com' }}</div>
+            <div>{{ $i + 1 }}</div>
+            <div>{{ $u->name }}</div>
+            <div>{{ $u->email }}</div>
             <div>5</div>
             <div>
                 <button class="text-red-500 hover:underline font-semibold">
@@ -43,7 +43,7 @@
                 </button>
             </div>
         </div>
-        @endfor
+        @endforeach
 
     </div>
 

@@ -51,7 +51,7 @@ class ProductController extends Controller
     //handle view all products
     public function index()
     {
-        $products = Produk::all();
+        $products = Produk::orderby('stok', 'asc')->get();
         return view('Staff.products', compact('products'));
     }
 

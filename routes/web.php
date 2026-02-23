@@ -14,10 +14,7 @@ Route::post('/staff', [AuthStaff::class, 'login'])->name('staff.login.post');
 Route::post('/staff/logout', [AuthStaff::class, 'logout'])->name('staff.logout');
 
 //staff protected routes
-Route::get('/staff/dashboard', function () {
-    return view('Staff.dashboard');
-});
-
+Route::get('/staff/dashboard', [AuthStaff::class, 'homestaff'])->name('staff.dashboard')->middleware('auth:staff');
 Route::get('/staff/orders', function () {
     return view('Staff.orders');
 });
@@ -38,9 +35,8 @@ Route::get('/admin/dashboard', function () {
     return view('Admin.dashboard');
 })->name('admin.dashboard');
 
-Route::get('/admin/staff', function () {
-    return view('Admin.staff');
-})->name('admin.staff');
+Route::get('/admin/staff', [AuthStaff::class, 'showstaff'])->name('admin.staff');
+Route::post('/admin/staff', [AuthStaff::class, 'create'])->name('admin.staff.create');
 
 Route::get('/admin/report', function () {
     return view('Admin.report');

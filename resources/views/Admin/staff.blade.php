@@ -21,7 +21,7 @@
 
     <!-- Button Tambah Staff -->
     <div class="mb-10">
-        <button class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 rounded-xl text-lg transition">
+        <button onclick="openModal()" class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 rounded-xl text-lg transition">
             Tambah Staff
         </button>
     </div>
@@ -29,7 +29,7 @@
     <!-- List Staff -->
     <div class="space-y-8">
 
-        @for ($i = 1; $i <= 4; $i++)
+        @foreach($staffs as $staff)
         <div class="flex items-center justify-between border border-teal-400 rounded-xl p-8 bg-gray-50">
 
             <!-- Left Content -->
@@ -49,7 +49,7 @@
 
                 <!-- Detail -->
                 <div class="space-y-2 text-gray-800">
-                    <p>Nama : Staff 1</p>
+                    <p>Nama : {{ $staff->username }}</p>
                     <p>Status : Aktif</p>
                     <p>Jam kerja : 09.00 - 17.00</p>
                 </div>
@@ -79,11 +79,70 @@
             </div>
 
         </div>
-        @endfor
+        @endforeach
 
     </div>
 
 </div>
 
+<!-- Modal Overlay -->
+<div id="staffModal"
+     class="fixed inset-0 bg-black/20 hidden items-center justify-center z-50">
+
+    <!-- Modal Box -->
+    <div class="bg-gray-100 w-full max-w-xl rounded-2xl p-10 relative">
+
+        <!-- Close Button -->
+        <button onclick="closeModal()"
+                class="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">
+            ✕
+        </button>
+
+        <h2 class="text-2xl font-bold text-center mb-8">Tambah Staff</h2>
+
+        <form action="{{ route('admin.staff.create') }}" method="POST" class="space-y-6">
+            @csrf
+
+            <div>
+                <label class="block mb-2 font-semibold">Nama</label>
+                <input type="text"
+                       name="username"
+                       class="w-full border border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400">
+            </div>
+
+            <div>
+                <label class="block mb-2 font-semibold">Password</label>
+                <input type="password"
+                       name="password"
+                       class="w-full border border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-400">
+            </div>
+
+            <button type="submit"
+                class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 rounded-xl transition">
+                Tambah Staff
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    document.getElementById('staffModal').classList.remove('hidden');
+    document.getElementById('staffModal').classList.add('flex');
+}
+
+function closeModal() {
+    document.getElementById('staffModal').classList.remove('flex');
+    document.getElementById('staffModal').classList.add('hidden');
+}
+
+// klik area gelap untuk close
+document.getElementById('staffModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeModal();
+    }
+});
+</script>
 
 

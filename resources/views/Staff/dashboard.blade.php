@@ -10,14 +10,14 @@
     <a href="/staff/orders" class="hover:text-teal-500">
         Orders
     </a>
-</nav>  
+</nav>
 @section("content")
 
     <main class="max-w-7xl mx-auto px-6 py-10">
 
     {{-- Welcome --}}
     <h1 class="text-3xl font-bold text-center mb-12">
-        Welcome, Staff 1
+        Welcome, {{ auth()->guard('staff')->user()->username }}
     </h1>
 
     {{-- Stats --}}
@@ -35,7 +35,7 @@
         <div class="border border-teal-400 rounded-xl p-6">
             <p class="text-lg">Pengguna</p>
             <p class="text-2xl font-bold mt-2">
-                135 user
+                {{ $totalusers }} user
             </p>
         </div>
 
@@ -49,30 +49,21 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
         {{-- Card --}}
-        @php
-            $products = [
-                ['title'=>'Poppy War','price'=>'160.000','img'=>'poppy.jpg'],
-                ['title'=>'Demon Slayer','price'=>'38.000','img'=>'demon.jpg'],
-                ['title'=>"Komi Can’t Communicate",'price'=>'38.000','img'=>'komi.jpg'],
-                ['title'=>'Blue Lock','price'=>'38.000','img'=>'bluelock.jpg'],
-            ];
-        @endphp
-
         @foreach($products as $p)
-        <div class="border border-red-400 rounded-xl p-4 flex flex-col items-center text-center">
-            <img src="{{ asset('storage/'.$p['img']) }}"
+        <div class="border {{ $p['stok'] == 0 ? 'border-red-400' : 'border-teal-500' }} rounded-xl p-4 flex flex-col items-center text-center">
+            <img src="{{ asset('storage/'.$p['gambar_produk']) }}"
                  class="h-48 object-contain mb-4">
 
             <p class="font-semibold text-lg mb-1">
-                {{ $p['title'] }}
+                {{ $p['nama_produk'] }}
             </p>
 
             <p class="mb-1">
-                Rp. {{ $p['price'] }}
+                Rp. {{ number_format($p['harga'], 0, ',', '.') }}
             </p>
 
             <p class="text-red-500 font-semibold">
-                Stok : 0
+                Stok : {{ $p['stok'] }}
             </p>
         </div>
         @endforeach
