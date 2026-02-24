@@ -7,26 +7,16 @@
     <title>E-commerce</title>
     @vite('resources/css/app.css')
 </head>
-<script>
-    function toggleDropdown() {
-        const dropdown = document.getElementById('profileDropdown');
-        dropdown.classList.toggle('hidden');
-    }
 
-    // klik luar nutup dropdown
-    window.addEventListener('click', function(e) {
-        const dropdown = document.getElementById('profileDropdown');
-        if (!e.target.closest('.relative')) {
-            dropdown.classList.add('hidden');
-        }
-    });
-</script>
 <body>
     @include('Layout.header')
 
     <div class="container mx-auto mt-4">
         @yield('content')
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
 
 </body>
 </html>

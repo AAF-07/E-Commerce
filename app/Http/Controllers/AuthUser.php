@@ -50,6 +50,7 @@ class AuthUser extends Controller
         ]);
     }
 
+
     public function logout(Request $request)
     {
         auth()->guard('user')->logout();

@@ -10,7 +10,7 @@
     <a href="/admin/staff" class="hover:text-teal-500">
         Staff
     </a>
-    <a href="/admin/backup" class="hover:text-teal-500">
+    <a href="/admin/data" class="hover:text-teal-500">
         Back Up
     </a>
 </nav>

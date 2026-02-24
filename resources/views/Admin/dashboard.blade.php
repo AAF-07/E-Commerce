@@ -11,7 +11,7 @@
     <a href="/admin/staff" class="hover:text-teal-500">
         Staff
     </a>
-    <a href="/admin/backup" class="hover:text-teal-500">
+    <a href="/admin/data" class="hover:text-teal-500">
         Back Up
     </a>
 </nav>
@@ -22,7 +22,7 @@
     <!-- Welcome -->
     <div class="text-center mb-12">
         <h1 class="text-3xl font-bold">
-            Selamat Datang, Admin 1
+            Selamat Datang, {{  auth()->guard('staff')->user()->username }}
         </h1>
     </div>
 
@@ -45,7 +45,7 @@
                 Pengguna
             </p>
             <h2 class="text-2xl font-bold">
-                135 user
+                {{ $totalusers }} user
             </h2>
         </div>
 
@@ -60,7 +60,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
             <!-- Card Staff -->
-            @for ($i = 1; $i <= 4; $i++)
+            @foreach ($staffs as $staff)
             <div class="border border-teal-400 rounded-xl p-8 bg-gray-50 text-left">
 
                 <!-- Icon -->
@@ -77,13 +77,13 @@
 
                 <!-- Detail -->
                 <div class="space-y-2 text-gray-800">
-                    <p>Nama : Staff 1</p>
+                    <p>Nama : {{ $staff->username }}</p>
                     <p>Status : Aktif</p>
                     <p>Jam kerja : 09.00 - 17.00</p>
                 </div>
 
             </div>
-            @endfor
+            @endforeach
 
         </div>
     </div>

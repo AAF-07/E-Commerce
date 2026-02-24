@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthStaff;
 use App\Http\Controllers\AuthUser;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -31,18 +32,19 @@ Route::put('/staff/products/edit/{id}', [ProductController::class, 'update'])->n
 Route::delete('/staff/products/delete/{id}', [ProductController::class, 'destroy'])->name('staff.products.destroy');
 
 //Admin routes
-Route::get('/admin/dashboard', function () {
-    return view('Admin.dashboard');
-})->name('admin.dashboard');
+Route::get('/admin/dashboard', [AuthStaff::class, 'homeadmin'])->name('admin.dashboard')->middleware('auth:staff');
 
 Route::get('/admin/staff', [AuthStaff::class, 'showstaff'])->name('admin.staff');
 Route::post('/admin/staff', [AuthStaff::class, 'create'])->name('admin.staff.create');
 
 Route::get('/admin/report', [ReportController::class, 'report'])->name('admin.report');
 
-Route::get('/admin/backup', function () {
+Route::get('/admin/data' , function (){
     return view('Admin.backup');
-})->name('admin.backup');
+});
+
+Route::get('/admin/backup', [BackupController::class, 'backup'])->name('admin.backup');
+Route::get('/admin/restore', [BackupController::class, 'restore'])->name('admin.restore');
 
 Route::get('/admin/report/user', [ReportController::class, 'userReport'])->name('admin.report.user');
 Route::get('/admin/report/earning', [ReportController::class, 'earningReport'])->name('admin.report.earning');
@@ -56,3 +58,8 @@ Route::post('/signup', [AuthUser::class, 'signup'])->name('user.signup.post');
 Route::get('/login', [AuthUser::class, 'showLoginForm'])->name('user.login');
 Route::post('/login', [AuthUser::class, 'login'])->name('user.login.post');
 Route::post('/logout', [AuthUser::class, 'logout'])->name('user.logout');
+
+//route produk
+Route::get('/product', [ProductController::class, 'products'])->name('user.products');
+Route::get('/product/{id}', [ProductController::class, 'productDetail'])->name('user.product');
+Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('user.products.category');

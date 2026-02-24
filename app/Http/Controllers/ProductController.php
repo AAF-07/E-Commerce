@@ -126,4 +126,28 @@ class ProductController extends Controller
            'novelproducts'
        ));
     }
+
+    public function products()
+    {
+        $products = Produk::all();
+        $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
+        $categories = Category::where('nama', '!=', ['Komik', 'Novel'])->get();
+        return view('User.products', compact('products', 'bookstype', 'categories'));
+    }
+
+    public function productByCategory($categoryId)
+    {
+        $categories = Category::findOrFail($categoryId);
+        $products = Produk::whereHas('categories', function ($q) use ($categoryId) {
+            $q->where('id', $categoryId);
+        })->get();
+        $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
+        return view('User.products', compact( 'categories', 'bookstype', 'products'));
+    }
+
+    public function productDetail($id)
+    {
+        $product = Produk::findOrFail($id);
+        return view('User.product', compact('product'));
+    }
 }

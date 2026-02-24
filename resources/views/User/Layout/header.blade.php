@@ -16,9 +16,11 @@
                     <option>Novel</option>
                 </select>
             </div>
+
         </div>
 
         <div class="flex-1 mx-10">
+
             <div class="relative">
                 <input type="text"
                        placeholder="Search"
@@ -55,15 +57,33 @@
         </div>
     </div>
 </header>
+
 <nav class="flex gap-6 font-semibold items-center justify-center bg-[#FAF5F5]/60">
     <div class="max-w-7xl mx-auto px-6 py-4 flex gap-10 font-semibold">
+        @if (request()->is('/'))
         <a href="/" class="hover:text-teal-600 border-b-2 border-teal-600 pb-1">
             Home
         </a>
         <a href="/product" class="hover:text-teal-600">
             Product
         </a>
+        @elseif(request()->is('product'))
+        <a href="/" class="hover:text-teal-600 ">
+            Home
+        </a>
+        <a href="/product" class="hover:text-teal-600 border-b-2 border-teal-600 pb-1">
+            Product
+        </a>
+        @else
+        <a href="/" class="hover:text-teal-600 ">
+            Home
+        </a>
+        <a href="/product" class="hover:text-teal-600">
+            Product
+        </a>
+        @endif
     </div>
+
 </nav>
 
 </div>

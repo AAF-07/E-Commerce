@@ -63,6 +63,13 @@ class AuthStaff extends Controller
         return view('Staff.dashboard', compact('totalusers', 'products'));
     }
 
+    public function homeadmin()
+    {
+        $totalusers = User::count();
+        $staffs = Staff::where('role', 'staff')->get();
+        return view('Admin.dashboard', compact('totalusers', 'staffs'));
+    }
+
     // Handle staff logout
     public function logout(Request $request)
     {

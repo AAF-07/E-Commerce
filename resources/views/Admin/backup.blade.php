@@ -10,7 +10,7 @@
     <a href="/admin/staff" class="hover:text-teal-500">
         Staff
     </a>
-    <a href="/admin/backup" class="border-b-2 border-teal-500 pb-1">
+    <a href="/admin/data" class="border-b-2 border-teal-500 pb-1">
         Back Up
     </a>
 </nav>
@@ -22,12 +22,12 @@
 
     <!-- Tombol Atas -->
     <div class="flex justify-center gap-6 mb-12">
-        <button class="bg-teal-400 hover:bg-teal-500 text-black font-semibold px-16 py-3 rounded-xl transition">
+        <a href="/admin/backup" class="bg-teal-400 hover:bg-teal-500 text-black font-semibold px-16 py-3 rounded-xl transition">
             Back Up
-        </button>
-        <button class="bg-teal-900 hover:bg-teal-800 text-white font-semibold px-16 py-3 rounded-xl transition">
+        </a>
+        <a href="/admin/restore" class="bg-teal-900 hover:bg-teal-800 text-white font-semibold px-16 py-3 rounded-xl transition">
             Restore
-        </button>
+        </a>
     </div>
 
     <!-- Table -->
