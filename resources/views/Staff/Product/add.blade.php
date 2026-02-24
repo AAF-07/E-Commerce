@@ -131,4 +131,28 @@ function previewFile(input) {
     }
 }
 
+function toggleDropdown() {
+    const dropdown = document.getElementById('dropdownMenu');
+    dropdown.classList.toggle('hidden');
+}
+
+function updateSelectedCategories() {
+    const checkboxes = document.querySelectorAll('.category-checkbox');
+    const selected = [];
+    checkboxes.forEach((checkbox) => {
+        if (checkbox.checked) {
+            selected.push(checkbox.value);
+        }
+    });
+    document.getElementById('hiddenCategories').value = selected.join(',');
+    document.getElementById('selectedCategories').innerText = selected.length > 0 ? selected.join(', ') : 'Pilih Kategori';
+}
+
+window.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('dropdownMenu');
+    if (!dropdown.parentElement.contains(e.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+
 </script>
