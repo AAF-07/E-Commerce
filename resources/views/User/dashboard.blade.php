@@ -9,21 +9,22 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
 
     <!-- Main Hero (lebih besar) -->
-    <div class="md:col-span-2">
+    <a href="#" class="md:col-span-2">
         <img src="{{ asset('image/hero.png') }}"
              alt="main-hero"
              class="w-full h-full rounded-2xl shadow-lg">
-    </div>
+    </a>
 
     <!-- Side Hero -->
     <div class="flex flex-col gap-6">
-        <img src="{{ asset('image/hero 1.png') }}"
+        <a href="#"><img src="{{ asset('image/hero 1.png') }}"
              alt="hero-1"
              class="w-full h-full object-cover rounded-2xl shadow-md">
-
-        <img src="{{ asset('image/Hero2.png') }}"
+        </a>
+        <a href="#"><img src="{{ asset('image/Hero2.png') }}"
              alt="hero-2"
              class="w-full h-full object-cover rounded-2xl shadow-md">
+        </a>
     </div>
 
 </div>

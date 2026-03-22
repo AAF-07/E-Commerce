@@ -1,31 +1,107 @@
 @extends('User.Layout.layout')
 
 @section('content')
-<div class="flex gap-6">
-    <div class="grid pl-10 sticky">
-        <img src="{{ asset('storage/' . $product->gambar_produk) }}" alt="{{ $product->nama_produk }}"
-            class="w-201 rounded shadow-md">
-    </div>
-    <div>
-        <h1 class="text-3xl font-bold mb-4">
-            {{ $product->nama_produk }}
-        </h1>
-        <p class="text-gray-600 text-xl mb-6">
-            Rp. {{ number_format($product->harga, 0, ',', '.') }}
-        </p>
-        <p class="text-gray-700 mb-6">
-            {{ $product->deskripsi }}
-        </p>
-        <p class="text-gray-700 mb-6">
-            Stok : {{ $product->stok }}
-        </p>
+<div class="px-10 py-6">
+
+    <div class="flex gap-10">
+
+        <!-- gambar -->
+        <div class="sticky top-24 self-start">
+            <img src="{{ asset('storage/' . $product->gambar_produk) }}"
+                 alt="{{ $product->nama_produk }}"
+                 class="w-64 rounded shadow-md">
+        </div>
+
+        <!-- detail produk -->
+        <div class="flex-1">
+
+            <p class="text-gray-500 mb-1">
+                {{ $product->penulis ?? 'Penulis tidak tersedia' }}
+            </p>
+
+            <h1 class="text-3xl font-bold mb-2 uppercase">
+                {{ $product->nama_produk }}
+            </h1>
+
+            <p class="text-2xl font-semibold mb-4">
+                Rp. {{ number_format($product->harga, 0, ',', '.') }}
+            </p>
+
+            <!-- aksi kecil -->
+            <div class="flex items-center gap-4 mb-6 text-gray-600">
+                <span>♡ Favorit</span>
+                <span>🔗 Bagikan</span>
+            </div>
+
+            <!-- deskripsi -->
+            <h2 class="font-semibold text-lg mb-2">Deskripsi</h2>
+            <p class="text-gray-700 mb-6">
+                {{ $product->deskripsi }}
+            </p>
+
+            <!-- detail tambahan -->
+            <h2 class="font-semibold text-lg mb-2">Detail Buku</h2>
+
+            <div class="grid grid-cols-2 gap-y-2 text-gray-700">
+                <p>Penerbit</p>
+                <p>{{ $product->penerbit ?? '-' }}</p>
+
+                <p>Tanggal Terbit</p>
+                <p>{{ $product->tanggal_terbit ?? '-' }}</p>
+
+                <p>Bahasa</p>
+                <p>{{ $product->bahasa ?? 'Indonesia' }}</p>
+
+                <p>Halaman</p>
+                <p>{{ $product->halaman ?? '-' }}</p>
+            </div>
+
+        </div>
+
+        <!-- sidebar beli -->
+        <div class="sticky top-24 w-64 border rounded-xl p-5 shadow-sm h-fit">
+
+            <!-- qty -->
+            <div class="flex items-center justify-between mb-4">
+                <button class="px-3 py-1 border rounded">-</button>
+                <span>1</span>
+                <button class="px-3 py-1 border rounded">+</button>
+            </div>
+
+            <!-- tombol -->
+            <button class="w-full mb-3 px-4 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
+                Keranjang
+            </button>
+
+            <button class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
+                Beli langsung
+            </button>
+
+        </div>
+
     </div>
 
-    <div>
-        <button class="px-6 py-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition duration-300">
-            Tambah ke Keranjang
-        </button>
-    </div>
+    <!-- produk lain -->
+    {{-- <div class="mt-16">
+        <div class="grid grid-cols-5 gap-6">
+
+            @foreach($relatedProducts as $item)
+            <div>
+                <img src="{{ asset('storage/' . $item->gambar_produk) }}"
+                     class="w-full h-48 object-cover rounded">
+
+                <p class="mt-2 font-medium">
+                    {{ $item->nama_produk }}
+                </p>
+
+                <p class="text-gray-600">
+                    Rp. {{ number_format($item->harga, 0, ',', '.') }}
+                </p>
+            </div>
+            @endforeach
+
+        </div>
+    </div> --}}
+
 </div>
-
 @endsection

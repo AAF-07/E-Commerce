@@ -131,7 +131,7 @@ class ProductController extends Controller
     {
         $products = Produk::all();
         $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
-        $categories = Category::where('nama', '!=', ['Komik', 'Novel'])->get();
+        $categories = Category::whereNotIn('nama', ['Komik', 'Novel'])->get();
         return view('User.products', compact('products', 'bookstype', 'categories'));
     }
 

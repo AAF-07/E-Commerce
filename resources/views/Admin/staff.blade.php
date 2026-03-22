@@ -145,4 +145,6 @@ document.getElementById('staffModal').addEventListener('click', function(e) {
 });
 </script>
 
+@endsection
+
 

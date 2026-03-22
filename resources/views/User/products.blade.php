@@ -3,8 +3,8 @@
 @section('content')
 <div class="flex gap-6 py-4">
     {{-- filter --}}
-    <div>
-        <div class="shadow border rounded-lg w-40 px-4 py-2 bg-[#FAF5F5] gap-4 mb-6">
+    <div class="sticky top-24" >
+        <div class=" shadow border rounded-lg w-40 px-4 py-2 bg-[#FAF5F5] gap-4 mb-6">
             <h1 class="text-lg font-semibold">Filter</h1>
             <ul>
                 <li><h2>Best Seller</h2></li>
@@ -14,7 +14,7 @@
 
         </div>
 
-        <div class="shadow border rounded-lg w-40 px-4 py-2 bg-[#FAF5F5] gap-4 mb-6">
+        <div class=" shadow border rounded-lg w-40 px-4 py-2 bg-[#FAF5F5] gap-4 mb-6">
             <h1 class="text-lg font-bold">Kategori</h1>
             <h2 class="text-m font-semibold">Jenis Buku</h2>
             <ol>
