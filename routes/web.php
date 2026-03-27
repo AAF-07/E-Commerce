@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthStaff;
 use App\Http\Controllers\AuthUser;
 use App\Http\Controllers\BackupController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -63,3 +64,18 @@ Route::post('/logout', [AuthUser::class, 'logout'])->name('user.logout');
 Route::get('/product', [ProductController::class, 'products'])->name('user.products');
 Route::get('/product/{id}', [ProductController::class, 'productDetail'])->name('user.product');
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('user.products.category');
+
+//route order
+Route::get('/orders', [OrderController::class, 'Pesanan'])->name('user.orders');
+
+//route cart
+Route::get('/cart', [OrderController::class, 'Keranjang'])->name('user.cart');
+
+//route checkout
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('user.checkout');
+
+//route detail pesanan
+Route::get('/orders_detail', [OrderController::class, 'detailPesanan'])->name('user.orders.detail');
+
+//route profile
+Route::get('/profile', [AuthUser::class, 'profile'])->name('user.profile');

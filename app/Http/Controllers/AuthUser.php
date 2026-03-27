@@ -59,4 +59,9 @@ class AuthUser extends Controller
 
         return redirect('/');
     }
+
+    public function profile()
+    {
+        return view('User.profile');
+    }
 }
