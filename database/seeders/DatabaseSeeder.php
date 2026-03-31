@@ -37,12 +37,12 @@ class DatabaseSeeder extends Seeder
         // Category::create(['nama' => 'Komik']);
         // Category::create(['nama' => 'Novel']);
         // Category::create(['nama' => 'Fantasi']);
-        Category::create(['nama' => 'Petualangan']);
-        Category::create(['nama' => 'Romansa']);
-        Category::create(['nama' => 'Misteri']);
-        Category::create(['nama' => 'Olahraga']);
-        Category::create(['nama' => 'Sci-fi']);
-        Category::create(['nama' => 'Thriller']);
+        // Category::create(['nama' => 'Petualangan']);
+        // Category::create(['nama' => 'Romansa']);
+        // Category::create(['nama' => 'Misteri']);
+        // Category::create(['nama' => 'Olahraga']);
+        // Category::create(['nama' => 'Sci-fi']);
+        // Category::create(['nama' => 'Thriller']);
 
 
 

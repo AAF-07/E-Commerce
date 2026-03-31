@@ -52,10 +52,10 @@
                     {{-- Kategori --}}
 
                     <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover" class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300" type="button">
-                      Pilih Kategori <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/></svg>
+                      Pilih Kategori 
                     </button>
 
-                    <!-- Dropdown menu -->"
+                    <!-- Dropdown menu -->
                     <div id="dropdownBgHover" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-100">
                         <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownBgHoverButton">
                           @foreach($categories as $category)

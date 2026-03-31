@@ -43,6 +43,17 @@
                         class="bg-teal-200 px-10 py-2 rounded-xl hover:bg-teal-300 transition">
                     Masuk
                 </button>
+                <p class="text-white text-sm mt-4 margin-0 padding-0">
+                    <a href="#" class="underline text-sm text-gray-200">
+                        Lupa password?
+                    </a>
+                </p>
+                <p class="text-white text-sm mt-4 margin-0 padding-0">
+                    Belum punya akun?
+                    <a href="/signup" class="underline">
+                        Daftar
+                    </a>
+                </p>
             </div>
         </form>
 

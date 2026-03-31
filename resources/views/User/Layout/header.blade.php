@@ -42,16 +42,50 @@
             @endguest
 
             @auth('user')
-                <span class="font-semibold">
-                    {{ auth('user')->user()->name }}
-                </span>
+                @if (auth('user')->user()->foto_profil)
+                    <img src="{{ asset('storage/' . auth('user')->user()->foto_profil) }}"
+                         alt="Profile"
+                         class="w-10 h-10 rounded-full">
+                @else
+                    <svg id="avatarButton"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="1.5"
+                         stroke="currentColor"
+                         data-dropdown-toggle="userDropdown"
+                         data-dropdown-placement="bottom-start"
+                         class="w-10 h-10 p-2 rounded-full cursor-pointer bg-gray-200 hover:bg-gray-300">
 
-                <form action="{{ route('user.logout') }}" method="POST">
-                    @csrf
-                    <button class="border px-4 py-2 rounded-lg">
-                        Logout
-                    </button>
-                </form>
+                    <p  ath stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                @endif
+                <!-- Dropdown menu -->
+                <div id="userDropdown" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
+                    <div class="px-4 py-3 border-b border-default-medium text-sm text-heading">
+                      <div class="font-medium">{{ auth('user')->user()->name }}</div>
+                      <div class="truncate">{{ auth('user')->user()->email }}</div>
+                    </div>
+                    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="avatarButton">
+                      <li>
+                        <a href="/profile" class="block w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Profile</a>
+                      </li>
+                      <li>
+                        <a href="/cart" class="block w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Keranjang</a>
+                      </li>
+                      <li>
+                        <a href="/orders" class="block w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Pesanan</a>
+                      </li>
+                      <li>
+                        <form action="{{ route('user.logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="block w-full p-2 hover:bg-neutral-tertiary-medium text-fg-danger rounded-md">Log out</button>
+                        </form>
+                      </li>
+                    </ul>
+                </div>
             @endauth
 
         </div>

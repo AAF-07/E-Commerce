@@ -54,7 +54,7 @@
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
         @foreach($latestproducts as $product)
-        <div class="group">
+        <a href="/product/{{ $product->id }}" class="group">
             <img src="{{ asset('storage/' . $product->gambar_produk) }}"
                  class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
@@ -63,7 +63,7 @@
             <p class="text-gray-600">
                 Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
-        </div>
+        </a>
         @endforeach
     </div>
 
@@ -73,7 +73,7 @@
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-14">
         @foreach($komikproducts as $product)
-        <div class="group">
+        <a href="/product/{{ $product->id }}" class="group">
             <img src="{{ asset('storage/' . $product->gambar_produk) }}"
                  class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
@@ -82,7 +82,7 @@
             <p class="text-gray-600">
                 Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
-        </div>
+        </a>
         @endforeach
     </div>
 
@@ -92,7 +92,7 @@
 
     <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
         @foreach($novelproducts as $product)
-        <div class="group">
+        <a href="/product/{{ $product->id }}" class="group">
             <img src="{{ asset('storage/' . $product->gambar_produk) }}"
                  class="w-full aspect-[5/8] rounded shadow-md group-hover:scale-105 transition duration-300">
             <h3 class="mt-3 font-semibold">
@@ -101,7 +101,7 @@
             <p class="text-gray-600">
                 Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
-        </div>
+        </a>
         @endforeach
     </div>
 

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>E-commerce</title>
     @vite('resources/css/app.css')
+    <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>   
 </head>
 <script>
     function toggleDropdown() {
