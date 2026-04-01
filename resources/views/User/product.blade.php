@@ -50,10 +50,8 @@
                 <p>{{ $product->tanggal_terbit ?? '-' }}</p>
 
                 <p>Bahasa</p>
-                <p>{{ $product->bahasa ?? 'Indonesia' }}</p>
+                <p>{{ $product->bahasa ?? '-' }}</p>
 
-                <p>Halaman</p>
-                <p>{{ $product->halaman ?? '-' }}</p>
             </div>
 
         </div>

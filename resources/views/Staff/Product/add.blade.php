@@ -49,10 +49,45 @@
                                required>
                     </div>
 
+                    {{-- penulis --}}
+                    <div>
+                        <label class="block font-semibold mb-2">Penulis</label>
+                        <input type="text"
+                               name="penulis"
+                               class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                               required>
+                    </div>
+
+                    {{-- bahasa --}}
+                    <div>
+                        <label class="block font-semibold mb-2">Bahasa</label>
+                        <input type="text"
+                               name="bahasa"
+                               class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                               required>
+                    </div>
+
+                    {{-- penerbit --}}
+                    <div>
+                        <label class="block font-semibold mb-2">Penerbit</label>
+                        <input type="text"
+                               name="penerbit"
+                               class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                               required>
+                    </div>
+
+                    {{-- tanggal terbit --}}
+                    <div>
+                        <label class="block font-semibold mb-2">Tanggal Terbit</label>
+                        <input type="date"
+                               name="tanggal_terbit"
+                               class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                               required>
+                    </div>
                     {{-- Kategori --}}
 
                     <button id="dropdownBgHoverButton" data-dropdown-toggle="dropdownBgHover" class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300" type="button">
-                      Pilih Kategori 
+                      Pilih Kategori
                     </button>
 
                     <!-- Dropdown menu -->
@@ -87,6 +122,8 @@
                                class="w-full border-2 border-teal-400 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-teal-300"
                                required>
                     </div>
+
+
 
                     {{-- Deskripsi --}}
                     <div>

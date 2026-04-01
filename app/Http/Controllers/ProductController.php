@@ -15,6 +15,10 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'nama_produk' => 'required|string|max:255',
             'gambar_produk' => 'required|image',
+            'penulis' => 'string|max:255',
+            'penerbit' => 'string|max:255',
+            'tanggal_terbit' => 'date',
+            'bahasa' => 'string|max:255',
             'deskripsi' => 'required|string',
             'harga' => 'required|numeric',
             'stok' => 'required|integer',
@@ -30,6 +34,10 @@ class ProductController extends Controller
         $produk = Produk::create([
             'nama_produk' => $validatedData['nama_produk'],
             'gambar_produk' => $validatedData['gambar_produk'],
+            'penulis' => $validatedData['penulis'],
+            'penerbit' => $validatedData['penerbit'],
+            'tanggal_terbit' => $validatedData['tanggal_terbit'],
+            'bahasa' => $validatedData['bahasa'],
             'deskripsi' => $validatedData['deskripsi'],
             'harga' => $validatedData['harga'],
             'stok' => $validatedData['stok'],

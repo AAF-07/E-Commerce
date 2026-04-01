@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('nama_produk');
             $table->string('gambar_produk');
             $table->text('deskripsi');
+            $table->text('bahasa');
+            $table->string('penulis');
+            $table->string('penerbit');
+            $table->date('tanggal_terbit')->nullable();
             $table->decimal('harga', 10, 2);
             $table->integer('stok');
             $table->timestamps();
