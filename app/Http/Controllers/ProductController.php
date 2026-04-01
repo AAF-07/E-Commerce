@@ -147,7 +147,20 @@ class ProductController extends Controller
 
     public function productDetail($id)
     {
-        $product = Produk::findOrFail($id);
-        return view('User.product', compact('product'));
+        $product = Produk::with('categories')->findOrFail($id);
+
+        // ambil category id dari product
+        $categoryIds = $product->categories->pluck('id');
+
+        $relatedProducts = Produk::with('categories')
+            ->whereHas('categories', function ($q) use ($categoryIds) {
+                $q->whereIn('categories.id', $categoryIds);
+            })
+            ->where('id', '!=', $id)
+            ->take(4)
+            ->get();
+
+        return view('User.product', compact('product', 'relatedProducts'));
     }
+
 }

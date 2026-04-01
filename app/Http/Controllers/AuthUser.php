@@ -29,7 +29,7 @@ class AuthUser extends Controller
 
         auth()->guard('user')->login($user);
 
-        return redirect('/')->with('success', 'Signup berhasil!');
+        return redirect('/login')->with('success', 'Signup berhasil!');
     }
 
     public function showLoginForm()

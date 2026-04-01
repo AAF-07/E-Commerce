@@ -59,7 +59,7 @@
         </div>
 
         <!-- sidebar beli -->
-        <div class="sticky top-24 w-64 border rounded-xl p-5 shadow-sm h-fit">
+        <div class="sticky top-24 w-80 border rounded-xl p-5 shadow-sm h-fit">
 
             <!-- qty -->
             <div class="flex items-center justify-between mb-4">
@@ -69,26 +69,38 @@
             </div>
 
             <!-- tombol -->
-            <a href="/cart" class="w-full mb-3 px-4 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
+            @if( auth('user')->check() )
+            <a href="/cart" class="w-full m-2 mb-3 px-6 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
                 Keranjang
             </a>
 
             <a href="/checkout" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
                 Beli langsung
             </a>
+            @else
+            <a href="/login" class="w-full m-2 mb-3 px-6 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
+                Keranjang
+            </a>
+
+            <a href="/login" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
+                Beli langsung
+            </a>
+            @endif
 
         </div>
 
     </div>
 
+    <h2 class="font-bold text-lg text-center mt-16 mb-0">Produk Lainnya</h2>
+
     <!-- produk lain -->
-    {{-- <div class="mt-16">
+    <div class="mt-16">
         <div class="grid grid-cols-5 gap-6">
 
             @foreach($relatedProducts as $item)
             <div>
                 <img src="{{ asset('storage/' . $item->gambar_produk) }}"
-                     class="w-full h-48 object-cover rounded">
+                     class="w-64 object-cover rounded">
 
                 <p class="mt-2 font-medium">
                     {{ $item->nama_produk }}
@@ -101,7 +113,7 @@
             @endforeach
 
         </div>
-    </div> --}}
+    </div>
 
 </div>
 @endsection
