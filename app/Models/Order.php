@@ -2,34 +2,29 @@
 
 namespace App\Models;
 
-use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $table = 'orders';
     protected $fillable = [
         'user_id',
         'order_code',
-        'total_price',
+        'total_amount',
         'status',
-        'snap_token',
+        'payment_method',
+        'midtrans_order_id',
+        'midtrans_transaction_id',
         'midtrans_response',
-        'paid_at'
+        'payment_time',
     ];
-
-    protected $casts = [
-        'midtrans_response' => 'array',
-        'paid_at' => 'datetime',
-    ];
-
-    public function orderItems()
-    {
-        return $this->hasMany(OrderItem::class, 'order_id');
-    }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

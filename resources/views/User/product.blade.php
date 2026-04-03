@@ -57,35 +57,50 @@
         </div>
 
         <!-- sidebar beli -->
-        <div class="sticky top-24 w-80 border rounded-xl p-5 shadow-sm h-fit">
+<div class="sticky top-24 w-80 border rounded-xl p-5 shadow-sm h-fit">
 
-            <!-- qty -->
-            <div class="flex items-center justify-between mb-4">
-                <button class="px-3 py-1 border rounded">-</button>
-                <span>1</span>
-                <button class="px-3 py-1 border rounded">+</button>
-            </div>
-
-            <!-- tombol -->
-            @if( auth('user')->check() )
-            <a href="/cart" class="w-full m-2 mb-3 px-6 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
-                Keranjang
-            </a>
-
-            <a href="/checkout" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
-                Beli langsung
-            </a>
-            @else
-            <a href="/login" class="w-full m-2 mb-3 px-6 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
-                Keranjang
-            </a>
-
-            <a href="/login" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
-                Beli langsung
-            </a>
-            @endif
-
+    <!-- qty -->
+    <form class="w-full mx-auto mb-6">
+        <label for="quantity-input" class="block mb-2.5 text-sm font-medium text-heading">Banyak barang:</label>
+        <div class="relative flex items-center justify-center max-w mx-auto">
+            <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-s-base text-sm px-3 focus:outline-none h-10">
+                <svg class="w-4 h-4 text-heading" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"/></svg>
+            </button>
+            <input type="text" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="50" aria-describedby="helper-text-explanation" class="border-x-0 h-10 placeholder:text-heading text-heading text-center w-full bg-neutral-secondary-medium border-default-medium py-2.5 placeholder:text-body" placeholder="999" value="1" required />
+            <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-e-base text-sm px-3 focus:outline-none h-10">
+                <svg class="w-4 h-4 text-heading" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/></svg>
+            </button>
         </div>
+    </form>
+
+    <!-- tombol -->
+    @if( auth('user')->check() )
+    <form action="{{ route('cart.add') }}" method="POST" class="space-y-3">
+        @csrf
+        <input type="hidden" name="id" value="{{ $product->id }}">
+        <input type="hidden" name="name" value="{{ $product->nama_produk }}">
+        <input type="hidden" name="price" value="{{ $product->harga }}">
+        <input type="hidden" name="quantity" id="quantity-form" value="1">
+
+        <button type="submit" class="w-full mb-3 px-4 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50">
+            Keranjang
+        </button>
+    </form>
+
+    <a href="/checkout" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 block text-center">
+        Beli langsung
+    </a>
+    @else
+    <a href="/login" class="w-full mb-3 px-4 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50 block text-center">
+        Keranjang
+    </a>
+
+    <a href="/login" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 block text-center">
+        Beli langsung
+    </a>
+    @endif
+
+</div>
 
     </div>
 

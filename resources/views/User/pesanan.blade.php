@@ -29,12 +29,17 @@
             <!-- card 1 -->
             <div class="flex items-center justify-between border border-teal-400 rounded-xl p-5">
                 <div class="flex gap-5 items-center">
-                    <img src="{{ asset('images/bluelock.jpg') }}" class="w-20 h-28 object-cover rounded">
-                    <div>
-                        <h2 class="text-xl font-semibold">Blue Lock</h2>
-                        <p>Rp. 38.000</p>
-                        <p class="text-gray-600">Status : Tunggu Konfirmasi</p>
-                    </div>
+                    @foreach($orders as $order)
+                        @foreach($order->items as $item)
+                            <img src="{{ asset('storage/' . $item->produk->image) }}" class="w-20 h-28 object-cover rounded">
+                            <div>
+                                <h2 class="text-xl font-semibold">{{ $item->produk->name }}</h2>
+                                <p>Rp. {{ number_format($item->price, 0, ',', '.') }}</p>
+                                <p class="text-gray-600">Status : {{ ucfirst($order->status) }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    @endforeach
                 </div>
 
                 <div class="flex gap-3">
@@ -46,39 +51,6 @@
                     </button>
                 </div>
             </div>
-
-            <!-- card 2 -->
-            <div class="flex items-center justify-between border border-teal-400 rounded-xl p-5">
-                <div class="flex gap-5 items-center">
-                    <img src="{{ asset('images/demonslayer.jpg') }}" class="w-20 h-28 object-cover rounded">
-                    <div>
-                        <h2 class="text-xl font-semibold">Demon Slayer</h2>
-                        <p>Rp. 38.000</p>
-                        <p class="text-gray-600">Status : Sudah sampai</p>
-                    </div>
-                </div>
-
-                <button class="px-5 py-2 bg-teal-500 text-white rounded-lg">
-                    Detail Pesanan
-                </button>
-            </div>
-
-            <!-- card 3 -->
-            <div class="flex items-center justify-between border border-teal-400 rounded-xl p-5">
-                <div class="flex gap-5 items-center">
-                    <img src="{{ asset('images/poppywar.jpg') }}" class="w-20 h-28 object-cover rounded">
-                    <div>
-                        <h2 class="text-xl font-semibold">The Poppy War</h2>
-                        <p>Rp. 160.000</p>
-                        <p class="text-gray-600">Status : Dikirim</p>
-                    </div>
-                </div>
-
-                <button class="px-5 py-2 bg-teal-500 text-white rounded-lg">
-                    Detail Pesanan
-                </button>
-            </div>
-
         </div>
     </div>
 </div>

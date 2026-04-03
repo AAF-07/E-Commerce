@@ -66,11 +66,13 @@ Route::get('/product/{id}', [ProductController::class, 'productDetail'])->name('
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('user.products.category');
 
 //route order
-Route::get('/orders', [OrderController::class, 'Pesanan'])->name('user.orders');
+Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth:user');
 
 //route cart
 Route::get('/cart', [OrderController::class, 'Keranjang'])->name('user.cart');
+Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
 
+Route::post('/cart/remove/{rowId}', [OrderController::class, 'remove'])->name('cart.remove');
 //route checkout
 Route::get('/checkout', [OrderController::class, 'checkout'])->name('user.checkout');
 
@@ -79,3 +81,4 @@ Route::get('/orders_detail', [OrderController::class, 'detailPesanan'])->name('u
 
 //route profile
 Route::get('/profile', [AuthUser::class, 'profile'])->name('user.profile');
+
