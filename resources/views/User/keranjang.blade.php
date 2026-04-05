@@ -46,7 +46,7 @@
                     </form>
 
                     <!-- delete -->
-                    <form action="{{ route('cart.remove', $item->rowId) }}" method="POST">
+                    <form action="{{ route('user.cart.remove', $item->rowId) }}" method="POST">
                         @csrf
                         <button type="submit" class="border border-teal-400 rounded-lg px-10 py-1 bg-red-500 text-white hover:bg-red-600">🗑</button>
                     </form>
@@ -78,11 +78,14 @@
                 <span id="final-price">Rp. 0</span>
             </div>
 
-            <a href="{{ route('user.checkout') }}">
-                <button class="w-full bg-teal-500 text-white py-2 rounded-lg hover:bg-teal-600">
-                    Beli
-                </button>
-            </a>
+            <form id="checkout-form" action="{{ route('user.checkout') }}" method="POST" style="display: none;">
+                @csrf
+                <input type="hidden" id="checked-items" name="checked_items" value="">
+            </form>
+
+            <button id="checkout-btn" class="w-full bg-teal-500 text-white py-2 rounded-lg hover:bg-teal-600">
+                Beli
+            </button>
         </div>
 
     </div>

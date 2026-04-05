@@ -75,7 +75,7 @@
 
     <!-- tombol -->
     @if( auth('user')->check() )
-    <form action="{{ route('cart.add') }}" method="POST" class="space-y-3">
+    <form action="{{ route('user.cart.add') }}" method="POST" class="space-y-3">
         @csrf
         <input type="hidden" name="id" value="{{ $product->id }}">
         <input type="hidden" name="name" value="{{ $product->nama_produk }}">

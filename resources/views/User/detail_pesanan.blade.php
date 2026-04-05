@@ -12,7 +12,7 @@
 
             <!-- LEFT: image + product -->
             <div>
-                <img src="{{ asset('images/poppywar.jpg') }}"
+                <img src="{{ asset('storage/' . $order->produk->gambar_produk) }}"
                      class="w-48 h-72 object-cover rounded mb-4">
 
                 <h2 class="text-xl font-semibold">The Poppy War</h2>

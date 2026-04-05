@@ -68,16 +68,29 @@ Route::get('/product/category/{id}', [ProductController::class, 'productByCatego
 //route order
 Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth:user');
 
-//route cart
-Route::get('/cart', [OrderController::class, 'Keranjang'])->name('user.cart');
-Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('cart.add');
+// Cart & Checkout routes
+Route::get('/cart', [OrderController::class, 'Keranjang'])->name('user.cart')->middleware('auth:user');
+Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('user.cart.add')->middleware('auth:user');
+Route::post('/cart/update/{rowId}', [OrderController::class, 'update'])->name('user.cart.update')->middleware('auth:user');
+Route::post('/cart/remove/{rowId}', [OrderController::class, 'remove'])->name('user.cart.remove')->middleware('auth:user');
 
-Route::post('/cart/remove/{rowId}', [OrderController::class, 'remove'])->name('cart.remove');
-//route checkout
-Route::get('/checkout', [OrderController::class, 'checkout'])->name('user.checkout');
+// Checkout routes
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('user.checkout')->middleware('auth:user');
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('user.checkout')->middleware('auth:user');
+Route::post('/checkout/alamat', [OrderController::class, 'alamatadd'])->name('checkout.alamat.add')->middleware('auth:user');
 
-//route detail pesanan
-Route::get('/orders_detail', [OrderController::class, 'detailPesanan'])->name('user.orders.detail');
+// Checkout callbacks
+Route::get('/checkout/finish', [OrderController::class, 'finish'])->name('checkout.finish')->middleware('auth:user');
+Route::get('/checkout/error', [OrderController::class, 'error'])->name('checkout.error');
+Route::get('/checkout/pending', [OrderController::class, 'pending'])->name('checkout.pending')->middleware('auth:user');
+
+// Orders routes
+Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth:user');
+Route::get('/orders_detail', [OrderController::class, 'detailPesanan'])->name('user.orders.detail')->middleware('auth:user');
+
+// Midtrans webhook (no auth needed)
+Route::post('/webhooks/midtrans', [OrderController::class, 'handleWebhook'])->name('midtrans.webhook');
+
 
 //route profile
 Route::get('/profile', [AuthUser::class, 'profile'])->name('user.profile');
