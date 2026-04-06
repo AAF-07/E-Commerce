@@ -1,15 +1,32 @@
 import './bootstrap';
 
 window.showTab = function(tabId) {
+    // 1. Hide all tab contents
     const tabContents = document.querySelectorAll('.tab-content');
     tabContents.forEach(content => content.classList.add('hidden'));
 
+    // 2. Show the selected tab
     const selectedTab = document.getElementById(tabId);
     if (selectedTab) {
         selectedTab.classList.remove('hidden');
     }
-}
 
+    // 3. Update Menu Styles
+    const menuItems = document.querySelectorAll('ul.space-y-3 li');
+    menuItems.forEach(item => {
+        // Remove active styles
+        item.classList.remove('font-semibold', 'underline', 'text-teal-600');
+        item.classList.add('text-gray-600'); // Optional: make inactive text dimmer
+    });
+
+    // Find the clicked item. We use 'onclick' context or find by matching text/id.
+    // Pro-tip: Add 'data-tab' attribute to your <li> tags for easier selection.
+    const activeMenu = document.querySelector(`[onclick="showTab('${tabId}')"]`);
+    if (activeMenu) {
+        activeMenu.classList.add('font-semibold', 'underline', 'text-teal-600');
+        activeMenu.classList.remove('text-gray-600');
+    }
+}
 document.addEventListener('DOMContentLoaded', () => {
     showTab('biodata');
 });
