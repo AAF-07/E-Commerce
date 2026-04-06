@@ -37,6 +37,7 @@ Route::get('/admin/dashboard', [AuthStaff::class, 'homeadmin'])->name('admin.das
 
 Route::get('/admin/staff', [AuthStaff::class, 'showstaff'])->name('admin.staff');
 Route::post('/admin/staff', [AuthStaff::class, 'create'])->name('admin.staff.create');
+Route::delete('/admin/staff/{id}', [AuthStaff::class, 'destroy'])->name('admin.staff.destroy');
 
 Route::get('/admin/report', [ReportController::class, 'report'])->name('admin.report');
 
@@ -86,7 +87,8 @@ Route::get('/checkout/pending', [OrderController::class, 'pending'])->name('chec
 
 // Orders routes
 Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth:user');
-Route::get('/orders_detail', [OrderController::class, 'detailPesanan'])->name('user.orders.detail')->middleware('auth:user');
+Route::get('/orders_detail/{id}', [OrderController::class, 'detailPesanan'])->name('user.orders.detail')->middleware('auth:user');
+Route::post('/orders/report/{id}', [OrderController::class, 'lapor'])->name('user.orders.report')->middleware('auth:user');
 
 // Midtrans webhook (no auth needed)
 Route::post('/webhooks/midtrans', [OrderController::class, 'handleWebhook'])->name('midtrans.webhook');
@@ -95,3 +97,10 @@ Route::post('/webhooks/midtrans', [OrderController::class, 'handleWebhook'])->na
 //route profile
 Route::get('/profile', [AuthUser::class, 'profile'])->name('user.profile');
 
+Route::get('/about_us', function() {
+    return view('User.about_us');
+});
+
+Route::get('/contact_us', function() {
+    return view('User.contact_us');
+});

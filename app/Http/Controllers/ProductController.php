@@ -143,13 +143,14 @@ class ProductController extends Controller
         return view('User.products', compact('products', 'bookstype', 'categories'));
     }
 
-    public function productByCategory($categoryId)
+    public function productByCategory($id)
     {
-        $categories = Category::findOrFail($categoryId);
-        $products = Produk::whereHas('categories', function ($q) use ($categoryId) {
-            $q->where('id', $categoryId);
+        $selectedCategory = Category::findOrFail($id);
+        $products = Produk::whereHas('categories', function ($q) use ($id) {
+            $q->where('categories.id', $id);
         })->get();
         $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
+        $categories = Category::all();
         return view('User.products', compact( 'categories', 'bookstype', 'products'));
     }
 

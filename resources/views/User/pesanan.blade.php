@@ -85,7 +85,7 @@
                                     Batalkan
                                 </button>
                             @endif
-                            <a href="{{ route('user.orders.detail') }}" class="px-5 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
+                            <a href="/orders/{{ $order->id }}" class="px-5 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
                                 Detail Pesanan
                             </a>
                         </div>

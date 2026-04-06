@@ -79,4 +79,12 @@ class AuthStaff extends Controller
 
         return redirect('/staff');
     }
+
+    public function destroy($id)
+    {
+        $staff = Staff::findOrFail($id);
+        $staff->delete();
+
+        return redirect()->route('admin.staff')->with('success', 'Staff berhasil dihapus!');
+    }
 }

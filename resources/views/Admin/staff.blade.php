@@ -60,11 +60,14 @@
             <div class="flex items-center gap-4">
 
                 <!-- Delete -->
-                <button class="px-6 py-2 border border-red-400 rounded-lg text-red-500 hover:bg-red-50 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         class="w-5 h-5"
-                         fill="none"
-                         viewBox="0 0 24 24"
+                <form action="{{ route('admin.staff.destroy', $staff->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="px-6 py-2 border border-red-400 rounded-lg text-red-500 hover:bg-red-50 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="w-5 h-5"
+                             fill="none"
+                             viewBox="0 0 24 24"
                          stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m-1-3H10a1 1 0 00-1 1v2h6V5a1 1 0 00-1-1z"/>
@@ -145,6 +148,6 @@ document.getElementById('staffModal').addEventListener('click', function(e) {
 });
 </script>
 
-@endsection
+
 
 

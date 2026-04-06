@@ -83,6 +83,7 @@
                 <option value="jne">JNE</option>
                 <option value="jt">J&T</option>
                 <option value="sicepat">SiCepat</option>
+                <option value="kurir_kami">Kurir Kami</option>
             </select>
 
             <!-- ringkasan -->

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Sign In</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-teal-900 min-h-screen flex items-center justify-between px-24">

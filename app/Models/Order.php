@@ -11,6 +11,8 @@ class Order extends Model
         'order_code',
         'total_amount',
         'status',
+        'pengiriman',
+        'alamat',
         'payment_method',
         'midtrans_order_id',
         'midtrans_transaction_id',

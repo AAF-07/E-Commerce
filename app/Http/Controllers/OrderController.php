@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Produk;
+use App\Models\Reported;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Midtrans\Config;
@@ -266,8 +267,30 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Alamat berhasil disimpan.');
     }
 
-    public function detailPesanan()
+    public function detailPesanan($id)
     {
-        return view('User.detail_pesanan');
+        $order = Order::where('user_id', auth('user')->id())->where('id', $id)->with('items.produk')->first();
+        return view('User.detail_pesanan', compact('order'));
+    }
+
+    public function lapor(Request $request, $id)
+    {
+        $request->validate([
+            'laporan' => 'required|string',
+        ]);
+
+        $order = Order::where('user_id', auth('user')->id())->where('id', $id)->first();
+
+        if (!$order) {
+            return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
+        }
+
+        Reported::create([
+            'order_id' => $order->id,
+            'user_id' => auth('user')->id(),
+            'laporan' => $request->laporan,
+        ]);
+
+        return redirect()->back()->with('success', 'Laporan berhasil dikirim.');
     }
 }

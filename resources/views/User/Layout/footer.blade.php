@@ -4,13 +4,13 @@
 
         <div>
             <h3 class="font-bold text-lg mb-2">Tentang Kami</h3>
-            <p>Tentang Kami</p>
+            <a href="/about_us" class="text-white hover:text-gray-300">Tentang Kami</a>
             <p>Toko Kami</p>
         </div>
 
         <div>
             <h3 class="font-bold text-lg mb-2">Contact</h3>
-            <p>Contact Us</p>
+            <a href="/contact_us" class="text-white hover:text-gray-300">Contact Us</a>
         </div>
 
         <div class="text-right self-end">

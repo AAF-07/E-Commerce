@@ -23,26 +23,26 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // Staff::create([
-        //     'username' => 'staff1',
-        //     'password' => bcrypt('password123'),
-        //     'role' => 'staff',
-        // ]);
-        // Staff::create([
-        //     'username' => 'admin1',
-        //     'password' => bcrypt('adminpassword'),
-        //     'role' => 'admin',
-        // ]);
+        Staff::create([
+            'username' => 'staff1',
+            'password' => bcrypt('password123'),
+            'role' => 'staff',
+        ]);
+        Staff::create([
+            'username' => 'admin1',
+            'password' => bcrypt('adminpassword'),
+            'role' => 'admin',
+        ]);
 
-        // Category::create(['nama' => 'Komik']);
-        // Category::create(['nama' => 'Novel']);
-        // Category::create(['nama' => 'Fantasi']);
-        // Category::create(['nama' => 'Petualangan']);
-        // Category::create(['nama' => 'Romansa']);
-        // Category::create(['nama' => 'Misteri']);
-        // Category::create(['nama' => 'Olahraga']);
-        // Category::create(['nama' => 'Sci-fi']);
-        // Category::create(['nama' => 'Thriller']);
+        Category::create(['nama' => 'Komik']);
+        Category::create(['nama' => 'Novel']);
+        Category::create(['nama' => 'Fantasi']);
+        Category::create(['nama' => 'Petualangan']);
+        Category::create(['nama' => 'Romansa']);
+        Category::create(['nama' => 'Misteri']);
+        Category::create(['nama' => 'Olahraga']);
+        Category::create(['nama' => 'Sci-fi']);
+        Category::create(['nama' => 'Thriller']);
 
 
 
