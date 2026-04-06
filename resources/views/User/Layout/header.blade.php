@@ -45,6 +45,8 @@
                 @if (auth('user')->user()->foto_profil)
                     <img src="{{ asset('storage/' . auth('user')->user()->foto_profil) }}"
                          alt="Profile"
+                         data-dropdown-toggle="userDropdown"
+                         data-dropdown-placement="bottom-start"
                          class="w-10 h-10 rounded-full">
                 @else
                     <svg id="avatarButton"

@@ -95,7 +95,17 @@ Route::post('/webhooks/midtrans', [OrderController::class, 'handleWebhook'])->na
 
 
 //route profile
-Route::get('/profile', [AuthUser::class, 'profile'])->name('user.profile');
+Route::middleware('auth:user')->group(function () {
+    Route::get('/profile', function () {
+        return view('User.profile');
+    })->name('user.profile');
+
+    Route::post('/profile/photo', [AuthUser::class, 'addPhoto'])->name('user.profile.addphoto');
+    Route::put('/profile/update', [AuthUser::class, 'update'])->name('user.profile.update');
+    Route::post('/address/add', [AuthUser::class, 'addAddress'])->name('user.address.add');
+    Route::put('/address/update', [AuthUser::class, 'updateAddress'])->name('user.address.update');
+    Route::delete('/address/delete', [AuthUser::class, 'deleteAddress'])->name('user.address.delete');
+});
 
 Route::get('/about_us', function() {
     return view('User.about_us');
