@@ -68,7 +68,7 @@
         </div>
 
         <!-- Modal toggle -->
-        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="text-red bg-white box-border border border-red hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
+        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="text-red items-center bg-white box-border border border-red hover:bg-gray focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
          Laporkan Masalah
         </button>
 
@@ -88,10 +88,11 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <form action="#" class="pt-4 md:pt-6">
+                    <form action="{{ route('user.orders.report', $order->id) }}" class="pt-4 md:pt-6" method="POST">
                         <div class="mb-4">
+                            @csrf
                             <label for="laporan" class="block mb-2.5 text-sm font-medium text-heading">Laporan</label>
-                            <textarea id="laporan" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Laporkan masalah" required></textarea>
+                            <textarea id="laporan" name="laporan" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Laporkan masalah" required></textarea>
                         </div>
 
                         <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none w-full mb-3">Kirim Laporan</button>

@@ -172,4 +172,22 @@ class ProductController extends Controller
         return view('User.product', compact('product', 'relatedProducts'));
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $products = Produk::where('nama_produk', 'like', '%' . $query . '%')
+            ->orWhere('deskripsi', 'like', '%' . $query . '%')
+            ->orWhereHas('categories', function ($q) use ($query) {
+                $q->where('nama', 'like', '%' . $query . '%');
+            })
+            ->get();
+
+        $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
+        $categories = Category::whereNotIn('nama', ['Komik', 'Novel'])->get();
+
+        return view('User.products', compact('products', 'bookstype', 'categories'));
+    }
+
+
 }

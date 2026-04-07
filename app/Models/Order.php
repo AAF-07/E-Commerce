@@ -13,6 +13,7 @@ class Order extends Model
         'status',
         'pengiriman',
         'alamat',
+        'no_hp',
         'payment_method',
         'midtrans_order_id',
         'midtrans_transaction_id',

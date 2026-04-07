@@ -29,14 +29,27 @@
 
             <!-- Cover -->
             <div>
-                <img src="{{ asset('images/poppy.jpg') }}"
-                     class="w-48 rounded shadow">
+                @if ($report->produk )
+                    <img src="{{ asset('storage/' . $report->produk->gambar_produk) }}" class="w-24 rounded" alt="Product Image">
 
-                <h2 class="text-xl font-semibold mt-6">
-                    The Poppy War
-                </h2>
+                    <h2 class="text-xl font-semibold mt-6">
+                        {{ $report->produk->nama_produk }}
+                    </h2>
+                @else
+                    <div class="w-24 h-24 bg-gray-200 rounded flex items-center justify-center text-gray-500">
+                        No Image
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-semibold mt-6">
+                            Produk tidak tersedia
+                        </h2>
+                    </div>
+                @endif
+
+
                 <p class="text-lg mt-2">
-                    Rp. 160.000
+                    Rp. {{ number_format($report->order->total_amount, 0, ',', '.') }}
                 </p>
             </div>
 
@@ -44,27 +57,27 @@
             <div class="space-y-3">
                 <div>
                     <p class="text-gray-500">Status</p>
-                    <p class="font-semibold">Dikirim</p>
+                    <p class="font-semibold">{{ $report->order->status }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">Pengiriman</p>
-                    <p class="font-semibold">JNT</p>
+                    <p class="font-semibold">{{ $report->order->pengiriman }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">Tanggal pembelian</p>
-                    <p class="font-semibold">22 Jan 2026</p>
+                    <p class="font-semibold">{{ $report->order->created_at->format('d M Y') }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">Estimasi tiba</p>
-                    <p class="font-semibold">25 Jan 2026</p>
+                    <p class="font-semibold">{{ $report->order->created_at->addDays(3)->format('d M Y') }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">Pembayaran</p>
-                    <p class="font-semibold">QRIS</p>
+                    <p class="font-semibold">{{ $report->order->payment_method }}</p>
                 </div>
             </div>
 
@@ -72,27 +85,27 @@
             <div class="space-y-3 border-l md:pl-8">
                 <div>
                     <p class="text-gray-500">Alamat</p>
-                    <p class="font-semibold">Jl. Raden Sanim</p>
+                    <p class="font-semibold">{{ $report->order->alamat }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">No. Pesanan</p>
-                    <p class="font-semibold">001</p>
+                    <p class="font-semibold">{{ $report->order->order_code }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">Nama</p>
-                    <p class="font-semibold">Abdul</p>
+                    <p class="font-semibold">{{ $report->user->name }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">Email</p>
-                    <p class="font-semibold">abdul98@gmail.com</p>
+                    <p class="font-semibold">{{ $report->user->email }}</p>
                 </div>
 
                 <div>
                     <p class="text-gray-500">No. Hp</p>
-                    <p class="font-semibold">Belum Ada</p>
+                    <p class="font-semibold">{{ $report->user->phone ?? 'Belum Ada' }}</p>
                 </div>
             </div>
 
@@ -101,7 +114,7 @@
         <!-- Laporan Text -->
         <div class="mt-10">
             <div class="border border-red-400 rounded-lg p-6 text-gray-700">
-                Estimasi tiba 25 Januari 2025. Tapi saya belum menerima paketnya.
+               {{ $report->laporan }}
             </div>
         </div>
 

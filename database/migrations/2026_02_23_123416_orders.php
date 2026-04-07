@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('order_code')->unique();
             $table->integer('total_amount');
             $table->string('status')->default('pending');
+            $table->string('no_hp')->nullable();
             $table->enum('pengiriman', ['jne', 'jt', 'sicepat', 'kurir_kami'])->default('kurir_kami');
             $table->string('alamat')->nullable();
             $table->string('payment_method')->nullable();

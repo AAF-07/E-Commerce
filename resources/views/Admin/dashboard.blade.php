@@ -32,10 +32,10 @@
         <!-- Pendapatan -->
         <div class="border border-teal-400 rounded-xl p-8 bg-gray-50">
             <p class="text-lg text-gray-700 mb-4">
-                Pendapatan
+                Laporan
             </p>
             <h2 class="text-2xl font-bold">
-                Rp. 4.300.000
+                {{ $totalreport }} Laporan
             </h2>
         </div>
 

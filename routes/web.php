@@ -45,62 +45,59 @@ Route::get('/admin/data' , function (){
     return view('Admin.backup');
 });
 
-Route::get('/admin/backup', [BackupController::class, 'backup'])->name('admin.backup');
-Route::get('/admin/restore', [BackupController::class, 'restore'])->name('admin.restore');
+Route::get('/admin/backup', [BackupController::class, 'show'])->name('admin.backup');
+Route::post('/admin/backup/download', [BackupController::class, 'backup'])->name('admin.backup.post');
+Route::post('/admin/restore/process', [BackupController::class, 'restore'])->name('admin.restore.post');
 
 Route::get('/admin/report/user', [ReportController::class, 'userReport'])->name('admin.report.user');
-Route::get('/admin/report/earning', [ReportController::class, 'earningReport'])->name('admin.report.earning');
 Route::get('/admin/report/order', [ReportController::class, 'orderReport'])->name('admin.report.order');
 Route::get('/admin/report/lapor', [ReportController::class, 'lapor'])->name('admin.report.lapor');
-
-//user auth routes
-Route::get('/signup', [AuthUser::class, 'showSignupForm'])->name('user.signup');
-Route::post('/signup', [AuthUser::class, 'signup'])->name('user.signup.post');
-
-Route::get('/login', [AuthUser::class, 'showLoginForm'])->name('user.login');
-Route::post('/login', [AuthUser::class, 'login'])->name('user.login.post');
-Route::post('/logout', [AuthUser::class, 'logout'])->name('user.logout');
+Route::get('admin/report_detail/{id}', [ReportController::class, 'reportDetail'])->name('admin.report.detail');
 
 //route produk
 Route::get('/product', [ProductController::class, 'products'])->name('user.products');
 Route::get('/product/{id}', [ProductController::class, 'productDetail'])->name('user.product');
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('user.products.category');
+Route::get('/search/{query}', [ProductController::class, 'search'])->name('user.products.search');
 
 //route order
-Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth:user');
+Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth');
 
 // Cart & Checkout routes
-Route::get('/cart', [OrderController::class, 'Keranjang'])->name('user.cart')->middleware('auth:user');
-Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('user.cart.add')->middleware('auth:user');
-Route::post('/cart/update/{rowId}', [OrderController::class, 'update'])->name('user.cart.update')->middleware('auth:user');
-Route::post('/cart/remove/{rowId}', [OrderController::class, 'remove'])->name('user.cart.remove')->middleware('auth:user');
+Route::get('/cart', [OrderController::class, 'Keranjang'])->name('user.cart')->middleware('auth');
+Route::post('/cart/add', [OrderController::class, 'addToCart'])->name('user.cart.add')->middleware('auth');
+Route::post('/cart/update/{rowId}', [OrderController::class, 'update'])->name('user.cart.update')->middleware('auth');
+Route::post('/cart/remove/{rowId}', [OrderController::class, 'remove'])->name('user.cart.remove')->middleware('auth');
 
 // Checkout routes
-Route::post('/checkout', [OrderController::class, 'checkout'])->name('user.checkout')->middleware('auth:user');
-Route::get('/checkout', [OrderController::class, 'checkout'])->name('user.checkout')->middleware('auth:user');
-Route::post('/checkout/alamat', [OrderController::class, 'alamatadd'])->name('checkout.alamat.add')->middleware('auth:user');
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('user.checkout')->middleware('auth');
+Route::get('/checkout', [OrderController::class, 'checkout'])->name('user.checkout')->middleware('auth');
+Route::post('/checkout/alamat', [OrderController::class, 'alamatadd'])->name('checkout.alamat.add')->middleware('auth');
 
 // Checkout callbacks
-Route::get('/checkout/finish', [OrderController::class, 'finish'])->name('checkout.finish')->middleware('auth:user');
+Route::get('/checkout/finish', [OrderController::class, 'finish'])->name('checkout.finish')->middleware('auth');
 Route::get('/checkout/error', [OrderController::class, 'error'])->name('checkout.error');
-Route::get('/checkout/pending', [OrderController::class, 'pending'])->name('checkout.pending')->middleware('auth:user');
+Route::get('/checkout/pending', [OrderController::class, 'pending'])->name('checkout.pending')->middleware('auth');
 
 // Orders routes
-Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth:user');
-Route::get('/orders_detail/{id}', [OrderController::class, 'detailPesanan'])->name('user.orders.detail')->middleware('auth:user');
-Route::post('/orders/report/{id}', [OrderController::class, 'lapor'])->name('user.orders.report')->middleware('auth:user');
+Route::get('/orders', [OrderController::class, 'pesanan'])->name('user.orders')->middleware('auth');
+Route::get('/orders_detail/{id}', [OrderController::class, 'detailPesanan'])->name('user.orders.detail')->middleware('auth');
+Route::post('/orders/report/{id}', [OrderController::class, 'lapor'])->name('user.orders.report')->middleware('auth');
 
 // Midtrans webhook (no auth needed)
 Route::post('/webhooks/midtrans', [OrderController::class, 'handleWebhook'])->name('midtrans.webhook');
 
 
 //route profile
-Route::middleware('auth:user')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
-        return view('User.profile');
+        $notify = auth()->user()->notifications()->latest()->get();
+        return view('User.profile', compact('notify'));
     })->name('user.profile');
 
+
     Route::post('/profile/photo', [AuthUser::class, 'addPhoto'])->name('user.profile.addphoto');
+    route::delete('/profile/photo', [AuthUser::class, 'deletePhoto'])->name('user.profile.delphoto');
     Route::put('/profile/update', [AuthUser::class, 'update'])->name('user.profile.update');
     Route::post('/address/add', [AuthUser::class, 'addAddress'])->name('user.address.add');
     Route::put('/address/update', [AuthUser::class, 'updateAddress'])->name('user.address.update');
@@ -114,3 +111,6 @@ Route::get('/about_us', function() {
 Route::get('/contact_us', function() {
     return view('User.contact_us');
 });
+
+
+require __DIR__.'/auth.php';

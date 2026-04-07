@@ -23,4 +23,10 @@ class Produk extends Model
     {
         return $this->belongsToMany(Category::class, 'category_produk', 'produk_id', 'category_id');
     }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
 }

@@ -15,79 +15,51 @@
     </a>
 </nav>
 @section('content')
-
 <div class="max-w-6xl mx-auto px-6 py-8">
-
     <h1 class="text-3xl font-bold text-center mb-8">Kelola Data</h1>
 
-    <!-- Tombol Atas -->
+    @if(session('success'))
+        <div class="bg-green-500 text-white p-4 rounded mb-4 text-center">{{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+        <div class="bg-red-500 text-white p-4 rounded mb-4 text-center">{{ session('error') }}</div>
+    @endif
+
     <div class="flex justify-center gap-6 mb-12">
-        <a href="/admin/backup" class="bg-teal-400 hover:bg-teal-500 text-black font-semibold px-16 py-3 rounded-xl transition">
-            Back Up
-        </a>
-        <a href="/admin/restore" class="bg-teal-900 hover:bg-teal-800 text-white font-semibold px-16 py-3 rounded-xl transition">
-            Restore
-        </a>
+        <form action="{{ route('admin.backup.post') }}" method="POST">
+            @csrf
+            <button type="submit" class="bg-teal-400 hover:bg-teal-500 text-black font-semibold px-16 py-3 rounded-xl transition shadow-lg">
+                Back Up Seluruh Database
+            </button>
+        </form>
+
+        <div class="bg-teal-900 text-white font-semibold px-6 py-3 rounded-xl shadow-lg flex items-center gap-4">
+            <span class="text-sm">Restore:</span>
+            <form action="{{ route('admin.restore.post') }}" method="POST" enctype="multipart/form-data" class="flex gap-4">
+                @csrf
+                <input type="file" name="backup_file" accept=".sql" class="text-xs text-teal-100 file:bg-teal-700 file:text-white file:border-none file:px-3 file:py-1 file:rounded cursor-pointer" required>
+                <button type="submit" class="bg-white text-teal-900 px-4 py-1 rounded text-sm hover:bg-teal-100 transition">
+                    Run Restore
+                </button>
+            </form>
+        </div>
     </div>
 
-    <!-- Table -->
     <div class="bg-white rounded-xl shadow-md overflow-hidden">
-
-        <!-- Header -->
         <div class="bg-teal-800 text-white grid grid-cols-4 px-6 py-4 font-semibold text-lg">
             <div>No.</div>
             <div>Data</div>
-            <div>Tanggal Terakhir</div>
-            <div>Aksi</div>
+            <div>Status</div>
+            <div>Informasi</div>
         </div>
 
-        <!-- Row 1 -->
-        <div class="grid grid-cols-4 px-6 py-4 items-center border-b">
+        <div class="grid grid-cols-4 px-6 py-4 items-center border-b italic text-gray-500">
             <div>1</div>
-            <div>Data Akun</div>
-            <div>10/02/2026</div>
-            <div class="space-x-3">
-                <button class="text-teal-500 hover:underline">Back up</button>
-                <button class="text-teal-900 hover:underline">Restore</button>
-            </div>
+            <div>Seluruh Database</div>
+            <div class="text-green-600 font-bold">Aktif</div>
+            <div class="text-xs">Backup mencakup Akun, Barang, Transaksi, dan Staff.</div>
         </div>
-
-        <!-- Row 2 -->
-        <div class="grid grid-cols-4 px-6 py-4 items-center border-b">
-            <div>2</div>
-            <div>Data Barang</div>
-            <div>10/02/2026</div>
-            <div class="space-x-3">
-                <button class="text-teal-500 hover:underline">Back up</button>
-                <button class="text-teal-900 hover:underline">Restore</button>
-            </div>
-        </div>
-
-        <!-- Row 3 -->
-        <div class="grid grid-cols-4 px-6 py-4 items-center border-b">
-            <div>3</div>
-            <div>Data Transaksi</div>
-            <div>10/02/2026</div>
-            <div class="space-x-3">
-                <button class="text-teal-500 hover:underline">Back up</button>
-                <button class="text-teal-900 hover:underline">Restore</button>
-            </div>
-        </div>
-
-        <!-- Row 4 -->
-        <div class="grid grid-cols-4 px-6 py-4 items-center">
-            <div>4</div>
-            <div>Data Akun User</div>
-            <div>10/02/2026</div>
-            <div class="space-x-3">
-                <button class="text-teal-500 hover:underline">Back up</button>
-                <button class="text-teal-900 hover:underline">Restore</button>
-            </div>
-        </div>
-
     </div>
-
 </div>
-
 
 

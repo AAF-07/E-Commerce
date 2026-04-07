@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Reported;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -66,8 +67,9 @@ class AuthStaff extends Controller
     public function homeadmin()
     {
         $totalusers = User::count();
+        $totalreport = Reported::count();
         $staffs = Staff::where('role', 'staff')->get();
-        return view('Admin.dashboard', compact('totalusers', 'staffs'));
+        return view('Admin.dashboard', compact('totalusers', 'staffs', 'totalreport'));
     }
 
     // Handle staff logout

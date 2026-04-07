@@ -42,6 +42,7 @@
                                 @if($order->status == 'pending') bg-yellow-500
                                 @elseif($order->status == 'paid') bg-blue-500
                                 @elseif($order->status == 'completed') bg-green-500
+                                @elseif($order->status == 'reported') bg-red-500
                                 @else bg-red-500
                                 @endif
                             ">
@@ -85,7 +86,7 @@
                                     Batalkan
                                 </button>
                             @endif
-                            <a href="/orders/{{ $order->id }}" class="px-5 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
+                            <a href="/orders_detail/{{ $order->id }}" class="px-5 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
                                 Detail Pesanan
                             </a>
                         </div>

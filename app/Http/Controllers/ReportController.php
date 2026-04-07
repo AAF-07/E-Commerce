@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Staff;
+use App\Models\Reported;
 use App\Models\User;
 // use Illuminate\Http\Request;
 
@@ -20,11 +20,6 @@ class ReportController extends Controller
         return view('Admin.report.earning', compact('data'));
     }
 
-    public function orderReport()
-    {
-        // Logika untuk mengambil data pesanan dan menampilkan laporan pesanan
-        return view('Admin.report.order');
-    }
 
     public function lapor()
     {
@@ -33,10 +28,15 @@ class ReportController extends Controller
     }
 
     public function report(){
-        $users = User::count();
-        $staffs = Staff::where('role', 'staff')->count();
-        return view('Admin.report', compact('users', 'staffs'));
+        $reported = Reported::with(['order', 'user', 'produk'])->orderBy('created_at', 'asc')->get();
+
+        return view('Admin.report', compact('reported'));
     }
 
+    public function reportDetail($id)
+    {
+        $report = Reported::with(['order', 'user', 'produk'])->findOrFail($id);
 
+        return view('Admin.report.lapor', compact('report'));
+    }
 }

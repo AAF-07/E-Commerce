@@ -23,4 +23,9 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Produk::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Reported::class);
+    }
 }

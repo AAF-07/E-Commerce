@@ -57,7 +57,7 @@
                 <h2 class="text-lg font-semibold mb-4">Pesanan</h2>
                 @forelse ($selectedItems as $item)
                     <div class="flex gap-5 items-center mb-4">
-                        <img src="{{ asset('storage/' . $item->options->image) }}" class="w-20 h-28 object-cover rounded">
+                        <img src="{{ asset('storage/' . $item->options['image']) }}" class="w-20 h-28 object-cover rounded">
                         <div>
                             <h3 class="text-lg font-semibold">{{ $item->name }}</h3>
                             <p>Rp. {{ number_format($item->price, 0, ',', '.') }}/barang</p>
@@ -78,7 +78,7 @@
             <!-- pengiriman -->
             <h2 class="text-lg font-semibold mb-3">Pengiriman</h2>
 
-            <select id="shipping-method" class="w-full border rounded-lg px-3 py-2 mb-5">
+            <select id="shipping-method" name="pengiriman" class="w-full border rounded-lg px-3 py-2 mb-5">
                 <option value="">Pilih Pengiriman</option>
                 <option value="jne">JNE</option>
                 <option value="jt">J&T</option>
