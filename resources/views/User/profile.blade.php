@@ -34,20 +34,21 @@
 
             <!-- menu -->
             <ul class="space-y-3">
-                <li onclick="showTab('biodata')" class="font-semibold underline cursor-pointer">Biodata</li>
-                <li onclick="showTab('alamat')" class="cursor-pointer">Set Alamat</li>
-                <li onclick="showTab('notifikasi')" class="cursor-pointer flex items-center gap-2">
+                <li id="menu-biodata" onclick="showTab('biodata')" class="cursor-pointer">Biodata</li>
+                <li id="menu-alamat" onclick="showTab('alamat')" class="cursor-pointer">Set Alamat</li>
+                <li id="menu-notifikasi" onclick="showTab('notifikasi'); markRead()" class="cursor-pointer flex items-center gap-2">
                     Notifikasi
-                    <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+                    @if(auth()->user()->unreadNotifications->count() > 0)
+                        <span id="notif-dot" class="w-2 h-2 bg-red-500 rounded-full"></span>
+                    @endif
                 </li>
-                <li class="cursor-pointer text-red-500">
+                 <li class="cursor-pointer text-red-500">
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit">Logout</button>
                     </form>
                 </li>
             </ul>
-
         </div>
 
         <!-- divider -->
@@ -280,22 +281,43 @@
                 </form>
             </div>
 
-             {{-- Notifikasi --}}
+            {{-- Notifikasi --}}
             <div id="notifikasi" class="tab-content hidden bg-gray-100 rounded-xl shadow p-8 space-y-4">
-
-                <div class="border border-teal-400 rounded-lg p-4">
-                    <p class="font-semibold">Pembayaran Diverifikasi</p>
-                    <p class="text-sm text-gray-700">
-                        @foreach ($notify as $notif)
-                        {{ $notif->data['message'] }} - {{ $notif->data['order_code'] }}
-                        @endforeach
-                    </p>
-                </div>
-
+                @forelse ($notify as $notif)
+                    <div class="border {{ $notif->read_at ? 'border-gray-300 bg-white' : 'border-teal-400 bg-teal-50' }} rounded-lg p-4">
+                        <div class="flex justify-between items-start">
+                            <p class="font-semibold">Pembayaran Diverifikasi</p>
+                            <span class="text-xs text-gray-500">{{ $notif->created_at->diffForHumans() }}</span>
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            {{ $notif->data['message'] }} - {{ $notif->data['order_code'] }}
+                        </p>
+                    </div>
+                @empty
+                    <p class="text-center text-gray-500">Tidak ada notifikasi.</p>
+                @endforelse
             </div>
         </div>
 
     </div>
 
 </div>
+<script>
+    function markRead() {
+    const dot = document.getElementById('notif-dot');
+    if (dot) {
+        fetch("{{ route('notifications.markRead') }}", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                dot.remove();
+            }
+        });
+    }
+}
+</script>
 @endsection

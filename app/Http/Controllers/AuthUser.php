@@ -76,4 +76,10 @@ class AuthUser extends Controller
 
         return redirect()->route('user.profile')->with('success', 'Alamat berhasil dihapus.');
     }
+  
+    public function markAsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+        return response()->json(['success' => true]);
+    }
 }

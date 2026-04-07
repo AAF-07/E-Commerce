@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function () {
         return view('User.profile', compact('notify'));
     })->name('user.profile');
 
-
+    Route::post('/notifications/mark-as-read', [AuthUser::class, 'markAsRead'])->name('notifications.markRead');
     Route::post('/profile/photo', [AuthUser::class, 'addPhoto'])->name('user.profile.addphoto');
     route::delete('/profile/photo', [AuthUser::class, 'deletePhoto'])->name('user.profile.delphoto');
     Route::put('/profile/update', [AuthUser::class, 'update'])->name('user.profile.update');
