@@ -7,26 +7,23 @@
             <a href="/" class="w-10">
                 <img src="{{ asset('image/Logo.png') }}" alt="logo">
             </a>
-
-            <!-- Dropdown kecil -->
-            {{-- <div class="relative">
-                <select class="border rounded-lg px-2 py-1 text-sm focus:outline-none">
-                    <option>All</option>
-                    <option>Komik</option>
-                    <option>Novel</option>
-                </select>
-            </div> --}}
-
         </div>
 
-        <div class="flex-1 mx-10">
+        <div class="flex justify-center  mx-5 ">
+            <div class="relative sticky top-0">
 
-            <div class="relative">
                 <form action="/search/{}" method="GET">
                     <input type="text"
                            name="query"
                            placeholder="Search"
-                           class="w-full bg-gray-100 rounded-full py-2 px-5 focus:outline-none focus:ring-2 focus:ring-teal-400">
+                           class="w-180 bg-gray-200 rounded-full px-10 py-2 focus:outline-none "/>
+
+                    <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500"
+                     fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"/>
+                    </svg>
                 </form>
             </div>
         </div>
@@ -50,7 +47,7 @@
                     @if(auth()->user()->unreadNotifications->count() > 0)
                         <span class="absolute top-0 right-0 block h-3 w-3 rounded-full ring-2 ring-white bg-red-500 z-50"></span>
                     @endif
-                
+
                     @if (auth()->user()->foto_profil)
                         <img src="{{ asset('storage/' . auth()->user()->foto_profil) }}"
                              alt="Profile"
@@ -68,7 +65,7 @@
                         </div>
                     @endif
                 </div>
-            
+
                 <div id="userDropdown" class="z-10 hidden bg-white border border-gray-200 rounded-lg shadow-lg w-44">
                     <div class="px-4 py-3 border-b border-gray-100 text-sm">
                         <div class="font-medium text-gray-900">{{ auth()->user()->name }}</div>

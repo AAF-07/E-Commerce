@@ -93,11 +93,11 @@
 
             <!-- Password -->
             <div>
-                <input type="password"
-                   name="password"
-                   placeholder="Password"
-                   required
-                   class="w-full rounded-xl px-5 py-3 bg-gray-200 focus:outline-none">
+                <input  type="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                        class="w-full rounded-xl px-5 py-3 bg-gray-200 focus:outline-none">
 
                 <p class="text-sm text-gray-300 mt-2">
                     Password harus terdiri dari minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol khusus.

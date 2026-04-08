@@ -15,11 +15,8 @@
                     placeholder="Search"
                     class="w-180 bg-gray-200 rounded-full px-10 py-2 focus:outline-none "
                 >
-                <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500"
-                     fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"/>
+                <svg class="w-5 h-5 absolute left-3 top-2.5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.65a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"/>
                 </svg>
             </div>
         </div>
@@ -44,21 +41,22 @@
                     </svg>
 
     <!-- Dropdown -->
-     <div id="userDropdown" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
-                    {{-- <div class="px-4 py-3 border-b border-default-medium text-sm text-heading">
-                      <div class="font-medium">{{ auth()->user()->name }}</div>
-                      <div class="truncate">{{ auth()->user()->email }}</div>
-                    </div> --}}
-                    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="avatarButton">
+    <div id="userDropdown" class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
+                    <div class="px-4 py-3 border-b border-default-medium text-sm text-heading">
+                        <div class="font-medium">{{ auth('staff')->user()->username }}</div>
+                        <div class="font-small">{{ auth('staff')->user()->role }}</div>
 
+                    </div>
+                    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="avatarButton">
+                        <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="block w-full p-2 hover:bg-neutral-tertiary-medium text-fg-danger rounded-md">Log out</button>
                         </form>
-                      </li>
+                    </li>
                     </ul>
                 </div>
-</div>
+    </div>
         </div>
 
     </div>

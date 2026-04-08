@@ -7,9 +7,9 @@
         <div class=" shadow border rounded-lg w-40 px-4 py-2 bg-[#FAF5F5] gap-4 mb-6">
             <h1 class="text-lg font-semibold">Filter</h1>
             <ul>
-                <li><h2>Best Seller</h2></li>
-                <li><h2>Akan Datang</h2></li>
-                <li><h2>Terfavorit</h2></li>
+                    <li><a href="{{ route('user.products.bestseller') }}">Best Seller</a></li>
+
+                    <li><a href="{{ route('user.products.newest') }}">Terbaru</a></li>
             </ul>
 
         </div>

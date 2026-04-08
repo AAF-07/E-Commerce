@@ -89,4 +89,6 @@ class AuthStaff extends Controller
 
         return redirect()->route('admin.staff')->with('success', 'Staff berhasil dihapus!');
     }
+
+
 }

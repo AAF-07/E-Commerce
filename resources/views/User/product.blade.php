@@ -27,11 +27,11 @@
                 Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
 
-            <!-- aksi kecil -->
+            {{-- <!-- aksi kecil -->
             <div class="flex items-center gap-4 mb-6 text-gray-600">
                 <span>♡ Favorit</span>
                 <span>🔗 Bagikan</span>
-            </div>
+            </div> --}}
 
             <!-- deskripsi -->
             <h2 class="font-semibold text-lg mb-2">Deskripsi</h2>
@@ -66,7 +66,7 @@
             <button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-s-base text-sm px-3 focus:outline-none h-10">
                 <svg class="w-4 h-4 text-heading" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"/></svg>
             </button>
-            <input type="text" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="50" aria-describedby="helper-text-explanation" class="border-x-0 h-10 placeholder:text-heading text-heading text-center w-full bg-neutral-secondary-medium border-default-medium py-2.5 placeholder:text-body" placeholder="999" value="1" required />
+            <input type="text" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="{{ $product->stok }}" aria-describedby="helper-text-explanation" class="border-x-0 h-10 placeholder:text-heading text-heading text-center w-full bg-neutral-secondary-medium border-default-medium py-2.5 placeholder:text-body" placeholder="999" value="1" required />
             <button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-e-base text-sm px-3 focus:outline-none h-10">
                 <svg class="w-4 h-4 text-heading" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/></svg>
             </button>
@@ -74,7 +74,12 @@
     </form>
 
     <!-- tombol -->
-    @if( auth()->check() )
+    @if($product->stok == 0)
+    <button class="w-full px-4 py-2 bg-gray-400 text-white rounded-lg cursor-not-allowed">
+        Stok Habis
+    </button>
+
+    @elseif( auth()->check() )
     <form action="{{ route('user.cart.add') }}" method="POST" class="space-y-3">
         @csrf
         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -86,11 +91,17 @@
             Keranjang
         </button>
 
-        <a href="{{ route('user.checkout', ['product_id' => $product->id]) }}" class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 block text-center">
-            Beli langsung
-        </a>
-    </form>
 
+    </form>
+    <form action="{{ route('user.checkout') }}" method="GET">
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="quantity" id="quantity-buy" value="1">
+
+        <button type="submit"
+            class="w-full px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
+            Beli langsung
+        </button>
+    </form>
 
     @else
     <a href="/login" class="w-full mb-3 px-4 py-2 border border-teal-500 text-teal-500 rounded-lg hover:bg-teal-50 block text-center">
@@ -131,4 +142,21 @@
     </div>
 
 </div>
+<script>
+    const qtyBuy = document.getElementById('quantity-buy');
+    const qtyInput = document.getElementById('quantity-input');
+    const qtyForm = document.getElementById('quantity-form');
+
+    qtyInput.addEventListener('input', function () {
+        qtyForm.value = this.value;
+    });
+
+    document.getElementById('increment-button').addEventListener('click', () => {
+        setTimeout(() => qtyForm.value = qtyInput.value, 100);
+    });
+
+    document.getElementById('decrement-button').addEventListener('click', () => {
+        setTimeout(() => qtyForm.value = qtyInput.value, 100);
+    });
+</script>
 @endsection

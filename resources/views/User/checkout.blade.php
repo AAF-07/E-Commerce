@@ -21,11 +21,11 @@
 
                 <!-- Modal toggle -->
                 <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="text-black bg-[#3BC1A8] box-border border border-transparent hover:bg-[#249E94] focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
-                  Buat Alamat
+                    Buat Alamat
                 </button>
 
                 <!-- Main modal -->
-                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-100 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
                         <!-- Modal content -->
                         <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
@@ -80,10 +80,10 @@
 
             <select id="shipping-method" name="pengiriman" class="w-full border rounded-lg px-3 py-2 mb-5">
                 <option value="">Pilih Pengiriman</option>
-                <option value="jne">JNE</option>
-                <option value="jt">J&T</option>
-                <option value="sicepat">SiCepat</option>
-                <option value="kurir_kami">Kurir Kami</option>
+                <option name="pengiriman" value="jne">JNE</option>
+                <option name="pengiriman" value="jt">J&T</option>
+                <option name="pengiriman" value="sicepat">SiCepat</option>
+                <option name="pengiriman" value="kurir_kami">Kurir Kami</option>
             </select>
 
             <!-- ringkasan -->
@@ -144,27 +144,20 @@
             return;
         }
 
-        if (!snapToken) {
-            alert('Token pembayaran tidak tersedia. Silakan coba lagi.');
-            return;
-        }
-
         snap.pay(snapToken, {
             onSuccess: function(result) {
-                console.log('Success:', result);
-                // Redirect ke finish dengan order_id yang benar
-                window.location.href = '/checkout/finish?order_id=' + result.order_id;
+                window.location.href = '/checkout/finish?order_id=' 
+                    + result.order_id 
+                    + '&pengiriman=' + shippingMethod;
             },
             onPending: function(result) {
-                console.log('Pending:', result);
                 window.location.href = '/checkout/pending?order_id=' + result.order_id;
             },
             onError: function(result) {
-                console.log('Error:', result);
                 window.location.href = '/checkout/error';
             },
             onClose: function() {
-                console.log('Payment popup closed');
+                console.log('User close popup');
             }
         });
     });

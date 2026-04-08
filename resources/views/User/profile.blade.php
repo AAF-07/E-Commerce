@@ -282,20 +282,34 @@
             </div>
 
             {{-- Notifikasi --}}
-            <div id="notifikasi" class="tab-content hidden bg-gray-100 rounded-xl shadow p-8 space-y-4">
-                @forelse ($notify as $notif)
-                    <div class="border {{ $notif->read_at ? 'border-gray-300 bg-white' : 'border-teal-400 bg-teal-50' }} rounded-lg p-4">
-                        <div class="flex justify-between items-start">
-                            <p class="font-semibold">Pembayaran Diverifikasi</p>
-                            <span class="text-xs text-gray-500">{{ $notif->created_at->diffForHumans() }}</span>
+            <div id="notifikasi" class="tab-content hidden bg-gray-100 rounded-xl shadow p-6">
+
+                <div class="max-h-[400px] overflow-y-auto pr-2 space-y-4">
+                    @forelse ($notify as $notif)
+                        <div class="border {{ $notif->read_at ? 'border-gray-300 bg-white' : 'border-teal-400 bg-teal-50' }} rounded-lg p-4">
+                            <div class="flex justify-between items-start">
+                                @if ($notif->type == 'App\Notifications\OrderShipped')
+                                    <p class="font-semibold">Pembayaran Diverifikasi</p>
+                                @elseif ($notif->type == 'App\Notifications\StatusChange')
+                                    <p class="font-semibold">Status Pesanan Berubah</p>
+                                @else
+                                    <p class="font-semibold">Notifikasi Baru</p>
+                                @endif
+
+                                <span class="text-xs text-gray-500">
+                                    {{ $notif->created_at->diffForHumans() }}
+                                </span>
+                            </div>
+
+                            <p class="text-sm text-gray-700">
+                                {{ $notif->data['message'] }} - {{ $notif->data['order_code'] }}
+                            </p>
                         </div>
-                        <p class="text-sm text-gray-700">
-                            {{ $notif->data['message'] }} - {{ $notif->data['order_code'] }}
-                        </p>
-                    </div>
-                @empty
-                    <p class="text-center text-gray-500">Tidak ada notifikasi.</p>
-                @endforelse
+                    @empty
+                        <p class="text-center text-gray-500">Tidak ada notifikasi.</p>
+                    @endforelse
+                </div>
+
             </div>
         </div>
 

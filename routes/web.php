@@ -17,9 +17,10 @@ Route::post('/staff/logout', [AuthStaff::class, 'logout'])->name('staff.logout')
 
 //staff protected routes
 Route::get('/staff/dashboard', [AuthStaff::class, 'homestaff'])->name('staff.dashboard')->middleware('auth:staff');
-Route::get('/staff/orders', function () {
-    return view('Staff.orders');
-});
+
+//STAFF order
+Route::get('/staff/orders', [OrderController::class, 'orderstaff'])->name('staff.orders')->middleware('auth:staff');
+Route::post('/staff/orders/{id}', [OrderController::class, 'updateStatus'])->name('staff.orders.update')->middleware('auth:staff');
 
 Route::get('/staff/products', [ProductController::class, 'index'])->name('staff.products.index');
 
@@ -56,8 +57,11 @@ Route::get('admin/report_detail/{id}', [ReportController::class, 'reportDetail']
 
 //route produk
 Route::get('/product', [ProductController::class, 'products'])->name('user.products');
+Route::get('/product/bestseller', [ProductController::class, 'bestSeller'])->name('user.products.bestseller');
+Route::get('/product/newest', [ProductController::class, 'newest'])->name('user.products.newest');
 Route::get('/product/{id}', [ProductController::class, 'productDetail'])->name('user.product');
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('user.products.category');
+
 Route::get('/search/{query}', [ProductController::class, 'search'])->name('user.products.search');
 
 //route order

@@ -3,100 +3,110 @@
 @section('content')
 <div class="px-10 py-6">
 
-    <!-- title -->
     <h1 class="text-3xl font-bold mb-6">Detail Pesanan</h1>
 
-    <div class="border border-teal-400 rounded-xl p-8">
+    <div class="border border-teal-400 rounded-xl p-8 bg-white shadow-sm">
 
-        <div class="flex gap-10 items-start">
+        <div class="flex gap-10 items-start mb-10">
 
-            <!-- LEFT: image + product -->
-            <div>
+            <div class="w-48">
                 @foreach($order->items as $item)
-                <img src="{{ asset('storage/' . $item->produk->gambar_produk) }}"
-                     class="w-48 h-72 object-cover rounded mb-4">
+                <div class="mb-6">
+                    <img src="{{ asset('storage/' . $item->produk->gambar_produk) }}"
+                         class="aespect-[5/8] object-cover rounded-lg shadow-md mb-3">
 
-                <h2 class="text-xl font-semibold">{{ $item->produk->nama_produk }}</h2>
-                <p>Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</p>
+                    <h2 class="text-lg font-bold text-gray-800">{{ $item->produk->nama_produk }}</h2>
+                    <p class="text-teal-600 font-semibold">Rp. {{ number_format($item->produk->harga, 0, ',', '.') }}</p>
+                </div>
                 @endforeach
             </div>
 
-            <!-- MIDDLE: info -->
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-4 flex-1">
                 <div>
-                    <p class="text-gray-500">Status</p>
-                    <p class="font-semibold">{{ $order->status }}</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Status</p>
+                    <p class="font-semibold text-teal-700">{{ strtoupper($order->status) }}</p>
                 </div>
 
                 <div>
-                    <p class="text-gray-500">Pengiriman</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Pengiriman</p>
                     <p class="font-semibold">{{ $order->pengiriman }}</p>
                 </div>
 
                 <div>
-                    <p class="text-gray-500">Tanggal pembelian</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Tanggal pembelian</p>
                     <p class="font-semibold">{{ $order->created_at->format('d M Y') }}</p>
                 </div>
 
                 <div>
-                    <p class="text-gray-500">Estimasi tiba</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Estimasi tiba</p>
                     <p class="font-semibold">{{ $order->created_at->addDays(5)->format('d M Y') }}</p>
                 </div>
 
                 <div>
-                    <p class="text-gray-500">Pembayaran</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Pembayaran</p>
                     <p class="font-semibold">{{ $order->payment_method }}</p>
                 </div>
             </div>
 
-            <!-- divider -->
-            <div class="w-px bg-gray-300 h-64"></div>
+            <div class="w-px bg-gray-200 self-stretch"></div>
 
-            <!-- RIGHT: alamat -->
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-6 flex-1">
                 <div>
-                    <p class="text-gray-500">Alamat</p>
-                    <p class="font-semibold">{{ $order->alamat }}</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">Alamat Pengiriman</p>
+                    <p class="text-gray-700 leading-relaxed">{{ $order->alamat }}</p>
                 </div>
 
                 <div>
-                    <p class="text-gray-500">No. Pesanan</p>
-                    <p class="font-semibold">{{ $order->order_code }}</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-500 font-bold">No. Pesanan</p>
+                    <p class="font-mono font-bold text-gray-800">{{ $order->order_code }}</p>
                 </div>
             </div>
 
         </div>
 
-        <!-- Modal toggle -->
-        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="text-red items-center bg-white box-border border border-red hover:bg-gray focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none" type="button">
-         Laporkan Masalah
-        </button>
+        <hr class="border-gray-100 mb-8">
 
-        <!-- Main modal -->
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="flex justify-center">
+            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                    class="bg-white border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bold py-3 px-10 rounded-xl transition-all duration-300 shadow-sm"
+                    type="button">
+                Laporkan Masalah
+            </button>
+        </div>
+
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black/50">
             <div class="relative p-4 w-full max-w-md max-h-full">
-                <!-- Modal content -->
-                <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
-                    <!-- Modal header -->
-                    <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
-                        <h3 class="text-lg font-medium text-heading">
-                            Buat Laporan
+                <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-100">
+                    <div class="flex items-center justify-between p-5 border-b border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-800">
+                            Buat Laporan Pesanan
                         </h3>
-                        <button type="button" class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center" data-modal-hide="authentication-modal">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/></svg>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-100 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="authentication-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <!-- Modal body -->
-                    <form action="{{ route('user.orders.report', $order->id) }}" class="pt-4 md:pt-6" method="POST">
-                        <div class="mb-4">
+                    <div class="p-6">
+                        <form action="{{ route('user.orders.report', $order->id) }}" method="POST">
                             @csrf
-                            <label for="laporan" class="block mb-2.5 text-sm font-medium text-heading">Laporan</label>
-                            <textarea id="laporan" name="laporan" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Laporkan masalah" required></textarea>
-                        </div>
+                            <div class="mb-5">
+                                <label for="laporan" class="block mb-2 text-sm font-bold text-gray-700">Detail Keluhan</label>
+                                <textarea id="laporan" name="laporan" rows="4"
+                                          class="w-full px-4 py-3 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-400 focus:border-teal-400 focus:outline-none transition-all placeholder:text-gray-400"
+                                          placeholder="Ceritakan kendala pesanan Anda di sini..." required></textarea>
+                            </div>
 
-                        <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none w-full mb-3">Kirim Laporan</button>
-                    </form>
+                            <button type="submit"
+                                    class="w-full text-white bg-teal-500 hover:bg-teal-600 font-bold py-3 rounded-xl shadow-lg shadow-teal-100 transition-all duration-300">
+                                Kirim Laporan
+                            </button>
+                            <p class="text-center text-xs text-gray-400 mt-4 italic">
+                                *Admin akan meninjau laporan Anda dalam 4x24 jam.
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

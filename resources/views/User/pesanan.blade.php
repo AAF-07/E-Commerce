@@ -12,19 +12,34 @@
         <div class="w-64 bg-gray-100 rounded-xl shadow p-5 h-fit sticky top-24">
             <h2 class="font-semibold text-lg mb-4">Filter</h2>
             <ul class="space-y-2 text-gray-600">
-                <li class="hover:text-black cursor-pointer">Semua</li>
-                <li class="hover:text-black cursor-pointer">Pending</li>
-                <li class="hover:text-black cursor-pointer">Paid</li>
-                <li class="hover:text-black cursor-pointer">Dikirim</li>
-                <li class="hover:text-black cursor-pointer">Completed</li>
-                <li class="hover:text-black cursor-pointer">Failed</li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'all']) }}" class="hover:text-black">Semua</a>
+                </li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'pending']) }}" class="hover:text-black">Pending</a>
+                </li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'paid']) }}" class="hover:text-black">Paid</a>
+                </li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'dikirim']) }}" class="hover:text-black">Dikirim</a>
+                </li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'completed']) }}" class="hover:text-black">Completed</a>
+                </li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'failed']) }}" class="hover:text-black">Failed</a>
+                </li>
+                <li>
+                    <a href="{{ route('user.orders', ['status' => 'reported']) }}" class="hover:text-black">Reported</a>
+                </li>
             </ul>
         </div>
-
+    
         <!-- content -->
         <div class="flex-1 space-y-5">
 
-            <p class="font-semibold text-gray-600 mb-4">Pembayaran akan dikonfirmasi dalam 1x24 jam</p>
+            <p class="font-semibold text-gray-600 mb-4">Laporan akan ditanggapi dalam 1x24 jam</p>
 
             @forelse($orders as $order)
                 <!-- order card -->
@@ -82,9 +97,9 @@
 
                         <div class="flex gap-3 ml-4">
                             @if($order->status != 'completed' && $order->status != 'failed')
-                                <button class="px-5 py-2 border border-red-400 text-red-400 rounded-lg hover:bg-red-50 transition">
+                                {{-- <button class="px-5 py-2 border border-red-400 text-red-400 rounded-lg hover:bg-red-50 transition">
                                     Batalkan
-                                </button>
+                                </button> --}}
                             @endif
                             <a href="/orders_detail/{{ $order->id }}" class="px-5 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition">
                                 Detail Pesanan

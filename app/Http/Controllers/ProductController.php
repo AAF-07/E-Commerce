@@ -140,6 +140,27 @@ class ProductController extends Controller
         $products = Produk::all();
         $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
         $categories = Category::whereNotIn('nama', ['Komik', 'Novel'])->get();
+
+        return view('User.products', compact('products', 'bookstype', 'categories',));
+    }
+
+    public function bestSeller()
+    {
+        $products = Produk::withCount('orderItems')
+            ->orderBy('order_items_count', 'desc')
+            ->get();
+                    $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
+        $categories = Category::whereNotIn('nama', ['Komik', 'Novel'])->get();
+
+        return view('User.products', compact('products', 'bookstype', 'categories'));
+    }
+
+    public function newest()
+    {
+        $products = Produk::latest()->get();
+        $bookstype = Category::whereIn('nama', ['Komik', 'Novel'])->get();
+        $categories = Category::whereNotIn('nama', ['Komik', 'Novel'])->get();
+
         return view('User.products', compact('products', 'bookstype', 'categories'));
     }
 

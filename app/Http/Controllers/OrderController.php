@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Produk;
 use App\Models\Reported;
 use App\Notifications\OrderShipped;
+use App\Notifications\StatusChange;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Midtrans\Config;
@@ -23,9 +24,18 @@ class OrderController extends Controller
         Config::$is3ds = config('midtrans.is_3ds');
     }
 
-    public function pesanan()
+    public function pesanan(Request $request)
     {
-        $orders = Order::where('user_id', auth()->id())->with('items.produk')->orderBy('created_at', 'desc')->get();
+        $query = Order::where('user_id', auth()->id())
+            ->with('items.produk');
+
+        // filter status
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $orders = $query->orderBy('created_at', 'desc')->get();
+
         return view('User.pesanan', compact('orders'));
     }
 
@@ -38,6 +48,10 @@ class OrderController extends Controller
     public function addToCart(Request $request)
     {
         $product = Produk::findOrFail($request->id);
+
+        if ($request->quantity > $product->stok) {
+            return back()->with('error', 'Stok tidak cukup');
+        }
 
         Cart::add([
             'id' => $product->id,
@@ -79,7 +93,7 @@ class OrderController extends Controller
         $alamat = auth()->user()->alamat;
         if ($request->has('pengiriman')) {
         session(['pengiriman' => $request->pengiriman]);
-    }
+        }
 
         if ($request->has('product_id')){
             $product = Produk::findorfail($request->input('product_id'));
@@ -181,7 +195,7 @@ class OrderController extends Controller
     public function finish(Request $request)
     {
         $orderId = $request->input('order_id');
-        $pengiriman = $request->input('pengiriman');
+        $pengiriman = session('pengiriman'); // Ambil dari session, default ke 'kurir_kami' jika tidak ada
 
         if (!$orderId) {
             return redirect()->route('user.cart')->with('error', 'Order ID tidak ditemukan.');
@@ -278,6 +292,19 @@ class OrderController extends Controller
 
             // Simpan setiap item ke tabel order_items
             foreach ($selectedItems as $item) {
+
+                $product = Produk::find($item->id);
+
+                // cek stok dulu
+                if ($product->stok < $item->qty) {
+                    throw new \Exception("Stok produk {$product->nama_produk} tidak cukup");
+                }
+
+                // kurangi stok
+                $product->stok -= $item->qty;
+                $product->save();
+
+                // simpan ke order_items
                 $order->items()->create([
                     'produk_id' => $item->id,
                     'quantity'  => $item->qty,
@@ -285,12 +312,11 @@ class OrderController extends Controller
                     'subtotal'  => $item->price * $item->qty,
                 ]);
 
-                // Hapus dari keranjang jika item ini memang dari keranjang
+                // hapus dari cart
                 if (!isset($item->is_direct) && isset($item->rowId)) {
                     \Cart::remove($item->rowId);
                 }
             }
-
             // Hapus semua session terkait checkout
             session()->forget(['checked_items', 'direct_buy_id', 'direct_buy_qty', 'pengiriman']);
 
@@ -400,5 +426,33 @@ class OrderController extends Controller
             \Log::error('Gagal kirim laporan: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Gagal mengirim laporan. Pastikan kolom produk_id di database sudah diatur ke nullable.');
         }
+    }
+
+    public function orderstaff()
+    {
+        $orders = Order::where('user_id', auth()->id())->with('items.produk')->orderBy('created_at', 'desc')->get();
+        return view('Staff.orders', compact('orders'));
+    }
+
+    public function searchOrderStaff(Request $request)
+    {
+        $query = $request->input('query');
+        $orders = Order::where('order_code', 'like', "%{$query}%")
+                            ->orWhere('status', 'like', "%{$query}%")
+                            ->with('items.produk', 'user')
+                            ->get();
+        return view('Staff.orders', compact('orders'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        $order->status = $request->status;
+        $order->save();
+
+        $order->user->notify(new StatusChange($order));
+
+        return redirect()->back()->with('success', 'Status order berhasil diperbarui.');
     }
 }
