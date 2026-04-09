@@ -27,12 +27,6 @@
                 Rp. {{ number_format($product->harga, 0, ',', '.') }}
             </p>
 
-            {{-- <!-- aksi kecil -->
-            <div class="flex items-center gap-4 mb-6 text-gray-600">
-                <span>♡ Favorit</span>
-                <span>🔗 Bagikan</span>
-            </div> --}}
-
             <!-- deskripsi -->
             <h2 class="font-semibold text-lg mb-2">Deskripsi</h2>
             <p class="text-gray-700 mb-6">
@@ -126,7 +120,7 @@
             @foreach($relatedProducts as $item)
             <div>
                 <img src="{{ asset('storage/' . $item->gambar_produk) }}"
-                     class="w-64 object-cover rounded">
+                    class="w-64 object-cover rounded">
 
                 <p class="mt-2 font-medium">
                     {{ $item->nama_produk }}

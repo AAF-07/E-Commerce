@@ -428,19 +428,23 @@ class OrderController extends Controller
         }
     }
 
-    public function orderstaff()
+    public function orderstaff(Request $request)
     {
         $orders = Order::where('user_id', auth()->id())->with('items.produk')->orderBy('created_at', 'desc')->get();
-        return view('Staff.orders', compact('orders'));
-    }
+                $query = $request->query('query');
 
-    public function searchOrderStaff(Request $request)
-    {
-        $query = $request->input('query');
-        $orders = Order::where('order_code', 'like', "%{$query}%")
-                            ->orWhere('status', 'like', "%{$query}%")
-                            ->with('items.produk', 'user')
-                            ->get();
+        $orders = Order::with('items.produk')
+            ->when($query, function ($q) use ($query) {
+                $q->where(function ($q) use ($query) {
+                    $q->where('order_code', 'like', "%{$query}%")
+                      ->orWhere('status', 'like', "%{$query}%")
+                      ->orWhereHas('items.produk', fn($q2) =>
+                          $q2->where('nama_produk', 'like', "%{$query}%")
+                      );
+                });
+            })
+            ->latest()
+            ->get();
         return view('Staff.orders', compact('orders'));
     }
 

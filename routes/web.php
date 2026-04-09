@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AuthStaff;
 use App\Http\Controllers\AuthUser;
 use App\Http\Controllers\BackupController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'show'])->name('home');
+
+Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroyadmin'])->name('admin.logout');
 
 //Staff auth routes
 Route::get('/staff', [AuthStaff::class, 'showLoginForm'])->name('staff.login');

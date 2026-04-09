@@ -56,4 +56,14 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    public function destroyadmin()
+    {
+        Auth::guard('staff')->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/staff');
+    }
 }

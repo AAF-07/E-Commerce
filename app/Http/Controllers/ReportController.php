@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reported;
 use App\Models\User;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
@@ -27,8 +27,11 @@ class ReportController extends Controller
         return view('Admin.report.lapor');
     }
 
-    public function report(){
-        $reported = Reported::with(['order', 'user', 'produk'])->orderBy('created_at', 'asc')->get();
+    public function report(Request $request){
+        $reported = Reported::with(['order', 'user', 'produk'])
+            ->whereHas('order', function ($q) {
+               $q->where('status', 'reported'); // filter utama
+        })->get();
 
         return view('Admin.report', compact('reported'));
     }
